@@ -6,34 +6,28 @@ $controllerQuocGia = new ControllerQuocGia();
 
 ?>
 
-<div class="container-fluid bg-success d-flex justify-content-center">
-    <div class="container row">
-        <div class="container col-12 col-md-5 d-flex justify-content-md-start justify-content-center">
-            <img class="logo-header p-1 logo" src="img/logo.png" onclick="window.location.href='index.php'">
-            <p class="h2 web-title text-light text logo" onclick="window.location.href='index.php'"><strong>PHIM HAY</strong></p>
-            <div style="clear: both"></div>
-        </div>
-        <div class="input-group mb-3 col-12 col-md-7 mt-3">
-            <input type="text" class="form-control w-25" placeholder="Tìm kiếm...">
-            <div class="input-group-append">
-                <button class="btn bg-white fa fa-search" type="button"></button>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="container-fluid bg-success d-flex justify-content-center">-->
+<!--    <div class="container row">-->
+<!---->
+<!--        <div class="input-group mb-3 col-12 col-md-7 mt-3">-->
+<!--            <input type="text" class="form-control w-25" placeholder="Tìm kiếm...">-->
+<!--            <div class="input-group-append">-->
+<!--                <button class="btn bg-white fa fa-search" type="button"></button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div class="container-fluid bg-success">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-success">
+            <a class="navbar-brand" href="index.php">
+                <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                <strong>PHIM HAY</strong>
+            </a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto list-inline">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php"><strong>PHIM HAY</strong></a>
-                    </li>
                     <li class="nav-item dropdown div-inline active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <strong>THỂ LOẠI</strong>
@@ -102,6 +96,16 @@ $controllerQuocGia = new ControllerQuocGia();
                     </li>
                 </ul>
             </div>
+            <form class="form-inline p-0 m-0">
+                <div class="input-group">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-dark" type="button">Tìm Kiếm</button>
+                    </div>
+                </div>
+            </form>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </nav>
-    </div>
 </div>
