@@ -8,13 +8,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
-    <style>
-        body {
-            font-family: 'Roboto';
-            font-size: 18px;
-        }
-    </style>
     <link rel="stylesheet" href="style/headerStyle.css">
+    <link rel="stylesheet" href="style/StyleIndex.css">
     <title>Phim Hay</title>
     <link rel="icon" href="img/logo.png">
 </head>
@@ -23,7 +18,7 @@
             include_once "header.php";
         ?>
 
-        <div class="container">
+        <div class="container margin-top">
             <h5 class="mt-3 text-warning font-weight-bold">PHIM ĐỀ CỬ</h5>
             <hr class="my-2 bg-light">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -48,7 +43,6 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
 
-
                                 </div>
                             </div>
                         </div>
@@ -59,8 +53,6 @@
                                 <img class="card-img-top" src="img/download.svg" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-
-
                                 </div>
                             </div>
                             <div class="card m-2" style="width: 18rem;">
@@ -84,24 +76,18 @@
                                 <img class="card-img-top" src="img/download.svg" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-
-
                                 </div>
                             </div>
                             <div class="card m-2" style="width: 18rem;">
                                 <img class="card-img-top" src="img/download.svg" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-
-
                                 </div>
                             </div>
                             <div class="card m-2" style="width: 18rem;">
                                 <img class="card-img-top" src="img/download.svg" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
-
-
                                 </div>
                             </div>
                         </div>
@@ -119,10 +105,112 @@
         </div>
 
         <div class="container">
-            <h5 class="mt-3 text-warning font-weight-bold">PHIM MỚI</h5>
+            <div class="container-fluid p-0 m-0 d-flex justify-content-between">
+                <h5 class="mt-3 text-warning font-weight-bold mb-0">PHIM MỚI</h5>
+                <a class="text text-warning p-0 mt-3 mr-1 mb-0" href="#" title="Xem thêm các phim mới">Xem thêm</a>
+            </div>
             <hr class="my-2 bg-light">
             <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-6 p-1">
+                        <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
+                            <img class="card-img-top" src="img/download.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
