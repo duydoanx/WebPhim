@@ -13,6 +13,26 @@
     <link rel="icon" href="img/logo.png">
 </head>
 <body class="bg-dark">
+<?php
+    session_start();
+    require_once __DIR__."/Controller/ControllerUser.php";
+    if (!isset($_SESSION['email'])) {
+        if (isset($_POST["login"])) {
+            $user = new ControllerUser();
+            if ($user->checkLogin($_POST["email"], $_POST["password"])) {
+                $_SESSION['email'] = $_POST["email"];
+
+                header("Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/index.php");
+            }
+        }
+    }else{
+        echo $_SESSION['email'];
+        header("Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/index.php");
+    }
+
+
+?>
+
     <div class="container h-100">
         <div class="row h-100">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto d-flex justify-content-center">
@@ -21,22 +41,22 @@
                         <h5 class="bg-transparent">Đăng nhập</h5>
                     </div>
                     <div class="card-body h-100">
-                        <form class="form-signin">
+                        <form class="form-signin" method="post" action="login.php">
                             <div class="form-label-group">
-                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                                <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                                 <label for="inputEmail">Địa chỉ email</label>
                             </div>
 
                             <div class="form-label-group">
-                                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                                <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                                 <label for="inputPassword">Mật khẩu</label>
                             </div>
 
                             <div class="custom-control custom-checkbox mb-3">
-                                <input type="checkbox" class="custom-control-input succ" id="customCheck1">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
                                 <label class="custom-control-label" for="customCheck1">Ghi nhớ đăng nhập</label>
                             </div>
-                            <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit">Đăng nhập</button>
+                            <button name="login" class="btn btn-lg btn-success btn-block text-uppercase" type="submit">Đăng nhập</button>
                         </form>
                     </div>
                 </div>

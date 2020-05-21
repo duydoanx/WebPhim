@@ -152,4 +152,6 @@ INSERT INTO USER(USERNAME, PASSWORD, ISADMIN, EMAIL, HOTEN, NGAYSINH) VALUES
 ('DuyDoan', 'c0f4c8e1fb9e150b8b8b15baf89f3a0b', 1, 'duydoan1411@gmail.com', 'Đoàn Bảo Duy', '1999-11-14');
 SELECT * FROM USER;
 
+
+
 #testgit
