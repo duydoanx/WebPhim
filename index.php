@@ -16,9 +16,10 @@
     <body class="bg-dark">
         <?php
             include_once "header.php";
+            include_once "Controller/ControllerPhim.php"
         ?>
 
-        <div class="container margin-top">
+        <div class="container topFix" >
             <h5 class="mt-3 text-warning font-weight-bold">PHIM ĐỀ CỬ</h5>
             <hr class="my-2 bg-light">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -104,6 +105,11 @@
             </div>
         </div>
 
+        <?php
+            $phim = new ControllerPhim();
+            $allPhim = $phim->getAllPhim();
+        ?>
+
         <div class="container">
             <div class="container-fluid p-0 m-0 d-flex justify-content-between">
                 <h5 class="mt-3 text-warning font-weight-bold mb-0">PHIM MỚI</h5>
@@ -112,6 +118,22 @@
             <hr class="my-2 bg-light">
             <div class="container">
                 <div class="row">
+
+                    <?php
+                    $anhPhim = "";
+                    foreach ($allPhim as $item) {
+                        $anhPhim = $item->getANHPHIM();
+                        echo "<div class=\"col-md-3 col-6 p-1\">";
+                        echo "<div class=\"card w-100 h-100 mt-2 mb-2 ml-0 mr-0\" style=\"width: 18rem;\">";
+                        echo "<img class=\"card-img-top\" src=\"".$item->getANHPHIM()."\" alt=\"Card image cap\">";
+                        echo "<div class=\"card-body\">
+                                <h5 class=\"card-title\">".$item->getTENPHIMGOC()."</h5>
+                            </div>
+                        </div>
+                    </div>";
+                    }
+                    ?>
+
                     <div class="col-md-3 col-6 p-1">
                         <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
                             <img class="card-img-top" src="img/download.svg" alt="Card image cap">
@@ -125,7 +147,8 @@
                         <div class="card w-100 h-100 mt-2 mb-2 ml-0 mr-0" style="width: 18rem;">
                             <img class="card-img-top" src="img/download.svg" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+                                <p class="card-title">Card title</p>
+                                <p class="card-text">text</p>
                             </div>
                         </div>
                     </div>
@@ -213,5 +236,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>

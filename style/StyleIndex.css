@@ -2,6 +2,6 @@ body {
     font-family: 'Roboto';
     font-size: 18px;
 }
-.margin-top{
+.topFix{
     margin-top: 80px !important;
 }
