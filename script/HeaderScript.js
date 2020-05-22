@@ -4,3 +4,6 @@ function loginURL() {
 function logout() {
     location.href='../login.php?logout=';
 }
+function toURL(url) {
+    location.href = "../"+url;
+}
