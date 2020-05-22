@@ -32,18 +32,27 @@ session_start();
                 <div class="btn-group mt-0 mr-2 d-block d-md-block d-lg-none d-xl-none">
                     <?php
                     if (!isset($_SESSION['email'])){
-                        echo "<button onclick='loginURL()' id='login-bt' type=\"button\" class=\"btn btn-secondary\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                    Login
+                        echo "<button onclick='loginURL()' id='login-bt' type=\"button\" class=\"btn btn-dark\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                    Đăng nhập
+                                  </button>";
+                        echo "<button onclick='toURL(\"register.php\")' id='login-bt' type=\"button\" class=\"btn btn-outline-dark\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                    Đăng kí
                                   </button>";
                     }else{
                         $email = $_SESSION["email"];
-                        $user = new ControllerUser();
-                        $username = $user->getUserFromEmail($email)->getUSERNAME();
-                        echo "<button type=\"button\" class=\"btn btn-secondary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                        $ControllerUser = new ControllerUser();
+                        $user = $ControllerUser->getUserFromEmail($email);
+                        $username = $user->getUSERNAME();
+                        echo "<button type=\"button\" class=\"btn btn-dark dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                                         $username
                           </button>
-                            <div class=\"dropdown-menu dropdown-menu-right\">
-                                <button onclick='logout()' class='dropdown-item' type='button'>Logout</button>                            
+                            <div class=\"dropdown-menu bg-dark border border-light dropdown-menu-right\">";
+
+                        if (strcmp($user->getISADMIN(), "1") == 0){
+                            echo "<button onclick='toURL(\"admin/index.php\")' class='dropdown-item bg-dark text-light' type='button'>Admin</button>";
+                        }
+
+                        echo "<button onclick='logout()' class='dropdown-item text-light bg-dark' type='button'>Logout</button>                            
                             </div>";
                     }
                     ?>
@@ -123,7 +132,6 @@ session_start();
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                     </li>
-
                 </ul>
 
                 <form class="form-inline p-0 mb-sm-1">
@@ -140,18 +148,27 @@ session_start();
             <div class="btn-group ml-1 mt-0 mb-1 mr-0 d-none d-md-none d-lg-block d-xl-block">
                 <?php
                 if (!isset($_SESSION['email'])){
-                    echo "<button onclick='loginURL()' id='login-bt' type=\"button\" class=\"btn btn-secondary\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                    Login
+                    echo "<button onclick='loginURL()' id='login-bt' type=\"button\" class=\"btn btn-dark\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                    Đăng nhập
+                                  </button>";
+                    echo "<button onclick='toURL(\"register.php\")' id='login-bt' type=\"button\" class=\"btn btn-outline-dark\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                    Đăng kí
                                   </button>";
                 }else{
                     $email = $_SESSION["email"];
-                    $user = new ControllerUser();
-                    $username = $user->getUserFromEmail($email)->getUSERNAME();
-                    echo "<button type=\"button\" class=\"btn btn-secondary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                    $ControllerUser = new ControllerUser();
+                    $user = $ControllerUser->getUserFromEmail($email);
+                    $username = $user->getUSERNAME();
+                    echo "<button type=\"button\" class=\"btn btn-dark dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                                         $username
                           </button>
-                            <div class=\"dropdown-menu dropdown-menu-right\">
-                                <button onclick='logout()' class='dropdown-item' type='button'>Logout</button>                            
+                            <div class=\"dropdown-menu dropdown-menu-right\">";
+
+                    if (strcmp($user->getISADMIN(), "1") == 0){
+                        echo "<button onclick='toURL(\"admin/index.php\")' class='dropdown-item' type='button'>Admin</button>";
+                    }
+
+                    echo "<button onclick='logout()' class='dropdown-item' type='button'>Logout</button>                            
                             </div>";
                 }
                 ?>

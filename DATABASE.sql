@@ -150,6 +150,8 @@ tạo nên hai phe gồm Iron Man và Captain America, gây ra một trận chi�
 
 INSERT INTO USER(USERNAME, PASSWORD, ISADMIN, EMAIL, HOTEN, NGAYSINH) VALUES
 ('DuyDoan', 'e10adc3949ba59abbe56e057f20f883e', 1, 'duydoan1411@gmail.com', 'Đoàn Bảo Duy', '1999-11-14');
+INSERT INTO USER(USERNAME, PASSWORD, ISADMIN, EMAIL, HOTEN, NGAYSINH) VALUES
+('DuyDoan1', 'e10adc3949ba59abbe56e057f20f883e', 0, 'duydoan1411user@gmail.com', 'Đoàn Bảo Duy', '1999-11-14');
 SELECT * FROM USER;
 
 

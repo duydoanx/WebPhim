@@ -6,17 +6,19 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
     <link rel="stylesheet" href="style/LoginStyle.css">
     <title>Đăng nhập - Phim Hay</title>
     <link rel="icon" href="img/logo.png">
+
 </head>
 <body class="bg-dark">
 <?php
-    session_start();
+
     require_once __DIR__."/Controller/ControllerUser.php";
+    $loginerror = false;
     if (isset($_REQUEST['logout'])){
+        session_start();
         $_SESSION = array();
         session_destroy();
     }
@@ -28,6 +30,9 @@
                 $_SESSION['email'] = $_POST["email"];
 
                 header("Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/index.php");
+            }else
+            {
+                $loginerror = true;
             }
         }
     }else{
@@ -56,6 +61,11 @@
                                 <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                                 <label for="inputPassword">Mật khẩu</label>
                             </div>
+                            <?php
+                                if ($loginerror){
+                                    echo "<p class='d-flex justify-content-center text-danger'>Tên đăng nhập hoặc mật khẩu không đúng.</p>";
+                                }
+                            ?>
                             <button name="login" class="btn btn-lg btn-success btn-block text-uppercase" type="submit">Đăng nhập</button>
                         </form>
                     </div>

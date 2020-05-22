@@ -8,6 +8,7 @@ class ControllerUser{
 
     public function checkLogin($email, $password){
         $password1 = getPassword($email);
+        if ($password1 == false) return false;
         return strcmp(md5($password), $password1) == 0;
     }
 

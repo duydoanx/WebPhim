@@ -32,7 +32,11 @@ function getPassword($email){
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->execute();
     $result = $stmt->fetch();
-    return $result["PASSWORD"];
+    if (isset($result["PASSWORD"])){
+        return $result["PASSWORD"];
+    }else{
+        return false;
+    }
 }
 
 function getUser($email = "", $username = ""){
