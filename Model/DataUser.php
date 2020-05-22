@@ -34,4 +34,16 @@ function getPassword($email){
     $result = $stmt->fetch();
     return $result["PASSWORD"];
 }
+
+function getUser($email = "", $username = ""){
+    $sql = "Select USERNAME, ISADMIN, EMAIL, HOTEN, NGAYSINH from USER WHERE EMAIL = :email or USERNAME = :username";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, "User");
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result;
+}
 ?>

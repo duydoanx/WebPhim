@@ -10,4 +10,8 @@ class ControllerUser{
         $password1 = getPassword($email);
         return strcmp(md5($password), $password1) == 0;
     }
+
+    public function getUserFromEmail($email){
+        return getUser($email);
+    }
 }

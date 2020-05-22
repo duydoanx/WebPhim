@@ -16,8 +16,13 @@
 <?php
     session_start();
     require_once __DIR__."/Controller/ControllerUser.php";
+    if (isset($_REQUEST['logout'])){
+        $_SESSION = array();
+        session_destroy();
+    }
     if (!isset($_SESSION['email'])) {
         if (isset($_POST["login"])) {
+            session_start();
             $user = new ControllerUser();
             if ($user->checkLogin($_POST["email"], $_POST["password"])) {
                 $_SESSION['email'] = $_POST["email"];
@@ -50,11 +55,6 @@
                             <div class="form-label-group">
                                 <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                                 <label for="inputPassword">Mật khẩu</label>
-                            </div>
-
-                            <div class="custom-control custom-checkbox mb-3">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Ghi nhớ đăng nhập</label>
                             </div>
                             <button name="login" class="btn btn-lg btn-success btn-block text-uppercase" type="submit">Đăng nhập</button>
                         </form>
