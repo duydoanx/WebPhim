@@ -1,8 +1,11 @@
 <?php
 require_once __DIR__."/Controller/ControllerTheLoai.php";
 require_once __DIR__."/Controller/ControllerQuocGia.php";
+require_once __DIR__."/Controller/ControllerUser.php";
 $controllerTheLoai = new ControllerTheLoai();
 $controllerQuocGia = new ControllerQuocGia();
+
+session_start();
 
 ?>
 
@@ -21,10 +24,36 @@ $controllerQuocGia = new ControllerQuocGia();
 <div class="container-fluid bg-success">
 
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-success">
-            <a class="navbar-brand" href="index.php">
-                <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                <strong>PHIM HAY</strong>
-            </a>
+                <a class="navbar-brand" href="index.php">
+                    <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <strong>PHIM HAY</strong>
+                </a>
+            <div class="d-flex justify-content-end">
+                <div class="btn-group mt-0 mr-2 d-block d-md-block d-lg-none d-xl-none">
+                    <?php
+                    if (!isset($_SESSION['email'])){
+                        echo "<button onclick='loginURL()' id='login-bt' type=\"button\" class=\"btn btn-secondary\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                    Login
+                                  </button>";
+                    }else{
+                        $email = $_SESSION["email"];
+                        $user = new ControllerUser();
+                        $username = $user->getUserFromEmail($email)->getUSERNAME();
+                        echo "<button type=\"button\" class=\"btn btn-secondary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                        $username
+                          </button>
+                            <div class=\"dropdown-menu dropdown-menu-right\">
+                                <button onclick='logout()' class='dropdown-item' type='button'>Logout</button>                            
+                            </div>";
+                    }
+                    ?>
+
+                </div>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto list-inline">
@@ -94,18 +123,39 @@ $controllerQuocGia = new ControllerQuocGia();
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                     </li>
+
                 </ul>
-            </div>
-            <form class="form-inline p-0 m-0">
-                <div class="input-group">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-dark" type="button">Tìm Kiếm</button>
+
+                <form class="form-inline p-0 mb-sm-1">
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-dark" type="button">Tìm Kiếm</button>
+                        </div>
                     </div>
-                </div>
-            </form>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                </form>
+            </div>
+
+
+            <div class="btn-group ml-1 mt-0 mb-1 mr-0 d-none d-md-none d-lg-block d-xl-block">
+                <?php
+                if (!isset($_SESSION['email'])){
+                    echo "<button onclick='loginURL()' id='login-bt' type=\"button\" class=\"btn btn-secondary\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                    Login
+                                  </button>";
+                }else{
+                    $email = $_SESSION["email"];
+                    $user = new ControllerUser();
+                    $username = $user->getUserFromEmail($email)->getUSERNAME();
+                    echo "<button type=\"button\" class=\"btn btn-secondary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                        $username
+                          </button>
+                            <div class=\"dropdown-menu dropdown-menu-right\">
+                                <button onclick='logout()' class='dropdown-item' type='button'>Logout</button>                            
+                            </div>";
+                }
+                ?>
+            </div>
+
         </nav>
 </div>

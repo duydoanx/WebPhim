@@ -149,7 +149,7 @@ sau sự kiện Avengers: Age Of Ultron, các liên minh chính phủ trên toà
 tạo nên hai phe gồm Iron Man và Captain America, gây ra một trận chiến sử thi giữa những người đồng đội.', null, null, null);
 
 INSERT INTO USER(USERNAME, PASSWORD, ISADMIN, EMAIL, HOTEN, NGAYSINH) VALUES
-('DuyDoan', 'c0f4c8e1fb9e150b8b8b15baf89f3a0b', 1, 'duydoan1411@gmail.com', 'Đoàn Bảo Duy', '1999-11-14');
+('DuyDoan', 'e10adc3949ba59abbe56e057f20f883e', 1, 'duydoan1411@gmail.com', 'Đoàn Bảo Duy', '1999-11-14');
 SELECT * FROM USER;
 
 
