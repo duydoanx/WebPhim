@@ -6,6 +6,7 @@ if (isset($_REQUEST['checkLogin'])){
     }else echo "false";
     exit();
 }
+
 ?>
 
 <html>
@@ -27,13 +28,13 @@ if (isset($_REQUEST['checkLogin'])){
 
     require_once __DIR__."/Controller/ControllerUser.php";
 
-
     $loginerror = false;
     if (isset($_REQUEST['logout'])){
         session_start();
         $_SESSION = array();
         session_destroy();
     }
+    session_start();
     if (!isset($_SESSION['email'])) {
         if (isset($_POST["login"])) {
             session_start();
@@ -41,14 +42,14 @@ if (isset($_REQUEST['checkLogin'])){
             if ($user->checkLogin($_POST["email"], $_POST["password"])) {
                 $_SESSION['email'] = $_POST["email"];
 
-                header("Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/index.php");
+                header("Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/");
             }else
             {
                 $loginerror = true;
             }
         }
     }else{
-        header("Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/index.php");
+        header("Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/");
     }
 
 
