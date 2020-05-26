@@ -1,3 +1,13 @@
+<?php
+if (isset($_REQUEST['checkLogin'])){
+    session_start();
+    if (isset($_SESSION['email'])){
+        echo "true";
+    }else echo "false";
+    exit();
+}
+?>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -16,6 +26,8 @@
 <?php
 
     require_once __DIR__."/Controller/ControllerUser.php";
+
+
     $loginerror = false;
     if (isset($_REQUEST['logout'])){
         session_start();
@@ -36,12 +48,14 @@
             }
         }
     }else{
-        echo $_SESSION['email'];
         header("Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/index.php");
     }
 
 
 ?>
+<div class="container-fluid p-0">
+    <a class="btn btn-success font-weight-bold" href="/">PHIM HAY</a>
+</div>
 
     <div class="container h-100">
         <div class="row h-100">

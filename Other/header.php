@@ -1,31 +1,18 @@
 <?php
-require_once __DIR__."/Controller/ControllerTheLoai.php";
-require_once __DIR__."/Controller/ControllerQuocGia.php";
-require_once __DIR__."/Controller/ControllerUser.php";
+require_once __DIR__ . "/../Controller/ControllerTheLoai.php";
+require_once __DIR__ . "/../Controller/ControllerQuocGia.php";
+require_once __DIR__ . "/../Controller/ControllerUser.php";
 $controllerTheLoai = new ControllerTheLoai();
 $controllerQuocGia = new ControllerQuocGia();
 
 session_start();
 
 ?>
-
-<!--<div class="container-fluid bg-success d-flex justify-content-center">-->
-<!--    <div class="container row">-->
-<!---->
-<!--        <div class="input-group mb-3 col-12 col-md-7 mt-3">-->
-<!--            <input type="text" class="form-control w-25" placeholder="Tìm kiếm...">-->
-<!--            <div class="input-group-append">-->
-<!--                <button class="btn bg-white fa fa-search" type="button"></button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
 <div class="container-fluid bg-success">
 
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-success">
-                <a class="navbar-brand" href="index.php">
-                    <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                <a class="navbar-brand" href="/">
+                    <img src="../img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                     <strong>PHIM HAY</strong>
                 </a>
             <div class="d-flex justify-content-end">
@@ -34,9 +21,6 @@ session_start();
                     if (!isset($_SESSION['email'])){
                         echo "<button onclick='loginURL()' id='login-bt' type=\"button\" class=\"btn btn-dark\" aria-haspopup=\"true\" aria-expanded=\"false\">
                                     Đăng nhập
-                                  </button>";
-                        echo "<button onclick='toURL(\"register.php\")' id='login-bt' type=\"button\" class=\"btn btn-outline-dark\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                    Đăng kí
                                   </button>";
                     }else{
                         $email = $_SESSION["email"];
@@ -136,7 +120,7 @@ session_start();
 
                 <form class="form-inline p-0 mb-sm-1">
                     <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control" type="search" placeholder="Nhập tên phim..." aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-dark" type="button">Tìm Kiếm</button>
                         </div>
@@ -151,9 +135,7 @@ session_start();
                     echo "<button onclick='loginURL()' id='login-bt' type=\"button\" class=\"btn btn-dark\" aria-haspopup=\"true\" aria-expanded=\"false\">
                                     Đăng nhập
                                   </button>";
-                    echo "<button onclick='toURL(\"register.php\")' id='login-bt' type=\"button\" class=\"btn btn-outline-dark\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                    Đăng kí
-                                  </button>";
+
                 }else{
                     $email = $_SESSION["email"];
                     $ControllerUser = new ControllerUser();
@@ -162,13 +144,13 @@ session_start();
                     echo "<button type=\"button\" class=\"btn btn-dark dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                                         $username
                           </button>
-                            <div class=\"dropdown-menu dropdown-menu-right\">";
+                            <div class=\"dropdown-menu bg-dark border border-light dropdown-menu-right\">";
 
                     if (strcmp($user->getISADMIN(), "1") == 0){
-                        echo "<button onclick='toURL(\"admin/index.php\")' class='dropdown-item' type='button'>Admin</button>";
+                        echo "<button onclick='toURL(\"admin/index.php\")' class='dropdown-item bg-dark text-light' type='button'>Admin</button>";
                     }
 
-                    echo "<button onclick='logout()' class='dropdown-item' type='button'>Logout</button>                            
+                    echo "<button onclick='logout()' class='dropdown-item text-light bg-dark' type='button'>Logout</button>                            
                             </div>";
                 }
                 ?>

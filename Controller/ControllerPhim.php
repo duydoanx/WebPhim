@@ -3,24 +3,29 @@ require __DIR__."/../Model/DataPhim.php";
 
 class ControllerPhim
 {
-    private $allPhim;
-
-    /**
-     * ControllerPhim constructor.
-     * @param $allPhim
-     */
-    public function __construct()
-    {
-        $this->allPhim = getAllPhim();
-    }
 
     /**
      * @return array
      */
     public function getAllPhim()
     {
-        return $this->allPhim;
+        $a = getLengthUser();
+        return getPhims(0, $a);
     }
 
+    public function getPhims($start, $quantity){
+        return getPhims($start, $quantity);
+    }
 
+    public function getPhimDeCu(){
+        return getPhimDeCu();
+    }
+
+    public function getPhim($id){
+        return getPhim($id);
+    }
+
+    public function getLengthPhim(){
+        return getLengthPhim();
+    }
 }
