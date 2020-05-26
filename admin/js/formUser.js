@@ -17,3 +17,9 @@ $('#menu_toggle').on("click", function () {
         $('.nav-md .container.body .col-md-3.left_col').css('display', 'none')
     }
 })
+
+
+$('#sidebar-menu .menu_section ul li').on("click", function () {
+    $('#sidebar-menu .menu_section ul li').removeClass('active')
+    $(this).addClass('active')
+})

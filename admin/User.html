@@ -61,10 +61,10 @@
                   <li>
                     <a href="/"><i class="fa fa-home"></i> Home</a>
                   </li>
-                  <li>
+                  <li class="active">
                     <a href="/User.html"><i class="fa fa-user"></i> User</a>
                   </li>
-                  <li class="active">
+                  <li>
                     <a href="/Movie.html"><i class="fa fa-film"></i> Movie</a>
                   </li>
                   <li>
@@ -128,10 +128,10 @@
         <div class="right_col" role="main">
           <div class="page-header zvn-page-header clearfix">
             <div class="zvn-page-header-title">
-              <h3>Danh sách Movie</h3>
+              <h3>Danh sách User</h3>
             </div>
             <div class="zvn-add-new pull-right">
-              <a href="/formMovie.html" class="btn btn-success"
+              <a href="/formUser.html" class="btn btn-success"
                 ><i class="fa fa-plus-circle"></i> Thêm mới</a
               >
             </div>
@@ -152,7 +152,7 @@
                 </div>
                 <div class="x_content BL">
                   <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-md-9 col-xs-12">
                       <div class="input-group">
                         <div class="input-group-btn">
                           <button
@@ -177,7 +177,15 @@
                                 href="#"
                                 class="select-field"
                                 data-field="username"
-                                >Search by Name</a
+                                >Search by Username</a
+                              >
+                            </li>
+                            <li>
+                              <a
+                                href="#"
+                                class="select-field"
+                                data-field="email"
+                                >Search by Email</a
                               >
                             </li>
                           </ul>
@@ -199,6 +207,19 @@
                         </span>
                         <input type="hidden" name="search_field" value="all" />
                       </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12">
+                      <select
+                        name="select_filter"
+                        class="form-control"
+                        data-field="level"
+                      >
+                        <option value="default" selected="selected"
+                          >Select Level</option
+                        >
+                        <option value="admin">Admin</option>
+                        <option value="member">Member</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -229,10 +250,10 @@
                       <thead>
                         <tr class="headings">
                           <th class="column-title">#</th>
-                          <th class="column-title">Tên</th>
-                          <th class="column-title">Trạng Thái</th>
-                          <th class="column-title">Thời Lượng</th>
-                          <th class="column-title">Trailer</th>
+                          <th class="column-title">Username</th>
+                          <th class="column-title">Email</th>
+                          <th class="column-title">Name</th>
+                          <th class="column-title">Level</th>
                           <th class="column-title">Tạo mới</th>
                           <th class="column-title">Chỉnh sửa</th>
                           <th class="column-title">Hành động</th>
@@ -241,12 +262,21 @@
                       <tbody>
                         <tr class="even pointer">
                           <td class="">1</td>
+                          <td width="10%">admin</td>
+                          <td>admin@gmail.com</td>
+                          <td>admin</td>
                           <td width="10%">
-                            Captain Ameriaca 3: Nội chiến Siêu Anh Hùng
+                            <select
+                              name="select_change_attr"
+                              class="form-control"
+                              data-url="/change-level-value_new/1"
+                            >
+                              <option value="admin" selected="selected"
+                                >Admin</option
+                              >
+                              <option value="member">Member</option>
+                            </select>
                           </td>
-                          <td>Hoàn tất</td>
-                          <td>147</td>
-                          <td>Null</td>
                           <td>
                             <p><i class="fa fa-user"></i> admin</p>
                             <p><i class="fa fa-clock-o"></i> 10/12/2014</p>
@@ -281,12 +311,21 @@
                         </tr>
                         <tr class="odd pointer">
                           <td class="">2</td>
+                          <td width="10%">member</td>
+                          <td>member@gmail.com</td>
+                          <td>member</td>
                           <td width="10%">
-                            Captain Ameriaca 2: Nội chiến Siêu Anh Hùng
+                            <select
+                              name="select_change_attr"
+                              class="form-control"
+                              data-url="/change-level-value_new/2"
+                            >
+                              <option value="admin">Admin</option>
+                              <option value="member" selected="selected"
+                                >Member</option
+                              >
+                            </select>
                           </td>
-                          <td>Hoàn tất</td>
-                          <td>120</td>
-                          <td>Null</td>
                           <td>
                             <p><i class="fa fa-user"></i> admin</p>
                             <p><i class="fa fa-clock-o"></i> 13/12/2014</p>
