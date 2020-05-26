@@ -21,7 +21,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"
+              <a href="index.php" class="site_title"
                 ><i
                   ><img
                     src="/img/logo.png"
@@ -45,8 +45,7 @@
             <!-- sidebar menu -->
             <div
               id="sidebar-menu"
-              class="main_menu_side hidden-print main_menu"
-            >
+              class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
@@ -124,7 +123,7 @@
             <div class="zvn-page-header-breadcrumb">
               <ul class="zvn-breadcrumb-title clearfix">
                 <li class="zvn-breadcrumb-item">
-                  <a href="index.html">
+                  <a href="index.php">
                     Trang chủ
                   </a>
                 </li>
@@ -183,10 +182,9 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
                           type="text"
-                          id="TenPhimVN""
+                          id="TenPhimVN"
                           required="required"
-                          class="form-control col-md-7 col-xs-12"
-                        />
+                          class="form-control col-md-7 col-xs-12"/>
                       </div>
                     </div>
                     <div class="form-group">

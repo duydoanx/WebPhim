@@ -25,8 +25,6 @@
                             <th class="column-title">Email</th>
                             <th class="column-title">Name</th>
                             <th class="column-title">Level</th>
-                            <th class="column-title">Tạo mới</th>
-                            <th class="column-title">Chỉnh sửa</th>
                             <th class="column-title">Hành động</th>
                         </tr>
                         </thead>
@@ -40,23 +38,12 @@
                                 <select
                                         name="select_change_attr"
                                         class="form-control"
-                                        data-url="/change-level-value_new/1"
-                                >
-                                    <option value="admin" selected="selected"
-                                    >Admin</option
-                                    >
+                                        data-url="/change-level-value_new/1">
+                                    <option value="admin" selected="selected">Admin</option>
                                     <option value="member">Member</option>
                                 </select>
                             </td>
-                            <td>
-                                <p><i class="fa fa-user"></i> admin</p>
-                                <p><i class="fa fa-clock-o"></i> 10/12/2014</p>
-                            </td>
-                            <td>
-                                <p><i class="fa fa-user"></i> hailan</p>
-                                <p><i class="fa fa-clock-o"></i> 10/12/2014</p>
-                            </td>
-                            <td class="last">
+                            <td class="">
                                 <div class="zvn-box-btn-filter">
                                     <a
                                             href="/form/1"
@@ -64,23 +51,22 @@
                                             class="btn btn-icon btn-success"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            data-original-title="Edit"
-                                    >
-                                        <i class="fa fa-pencil"></i> </a
-                                    ><a
+                                            data-original-title="Edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a
                                             href="/delete/1"
                                             type="button"
                                             class="btn btn-icon btn-danger btn-delete"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            data-original-title="Delete"
-                                    >
+                                            data-original-title="Delete">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </div>
                             </td>
                         </tr>
-                        <tr class="odd pointer">
+                        <tr class="">
                             <td class="">2</td>
                             <td width="10%">member</td>
                             <td>member@gmail.com</td>
@@ -89,21 +75,11 @@
                                 <select
                                         name="select_change_attr"
                                         class="form-control"
-                                        data-url="/change-level-value_new/2"
-                                >
+                                        data-url="/change-level-value_new/2">
                                     <option value="admin">Admin</option>
                                     <option value="member" selected="selected"
-                                    >Member</option
-                                    >
+                                    >Member</option>
                                 </select>
-                            </td>
-                            <td>
-                                <p><i class="fa fa-user"></i> admin</p>
-                                <p><i class="fa fa-clock-o"></i> 13/12/2014</p>
-                            </td>
-                            <td>
-                                <p><i class="fa fa-user"></i> hailan</p>
-                                <p><i class="fa fa-clock-o"></i> 13/12/2014</p>
                             </td>
                             <td class="last">
                                 <div class="zvn-box-btn-filter">
@@ -113,17 +89,16 @@
                                             class="btn btn-icon btn-success"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            data-original-title="Edit"
-                                    >
-                                        <i class="fa fa-pencil"></i> </a
-                                    ><a
+                                            data-original-title="Edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a
                                             href="/delete/2"
                                             type="button"
                                             class="btn btn-icon btn-danger btn-delete"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            data-original-title="Delete"
-                                    >
+                                            data-original-title="Delete">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 </div>
@@ -136,4 +111,3 @@
         </div>
     </div>
 </div>
-

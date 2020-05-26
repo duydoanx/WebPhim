@@ -21,10 +21,10 @@
                         <thead>
                         <tr class="headings">
                             <th class="column-title">#</th>
-                            <th class="column-title">Username</th>
-                            <th class="column-title">Email</th>
-                            <th class="column-title">Name</th>
-                            <th class="column-title">Level</th>
+                            <th class="column-title">Tên</th>
+                            <th class="column-title">Trạng Thái</th>
+                            <th class="column-title">Thời Lượng</th>
+                            <th class="column-title">Trailer</th>
                             <th class="column-title">Tạo mới</th>
                             <th class="column-title">Chỉnh sửa</th>
                             <th class="column-title">Hành động</th>
@@ -33,21 +33,12 @@
                         <tbody>
                         <tr class="even pointer">
                             <td class="">1</td>
-                            <td width="10%">admin</td>
-                            <td>admin@gmail.com</td>
-                            <td>admin</td>
                             <td width="10%">
-                                <select
-                                        name="select_change_attr"
-                                        class="form-control"
-                                        data-url="/change-level-value_new/1"
-                                >
-                                    <option value="admin" selected="selected"
-                                    >Admin</option
-                                    >
-                                    <option value="member">Member</option>
-                                </select>
+                                Captain Ameriaca 3: Nội chiến Siêu Anh Hùng
                             </td>
+                            <td>Hoàn tất</td>
+                            <td>147</td>
+                            <td>Null</td>
                             <td>
                                 <p><i class="fa fa-user"></i> admin</p>
                                 <p><i class="fa fa-clock-o"></i> 10/12/2014</p>
@@ -82,21 +73,12 @@
                         </tr>
                         <tr class="odd pointer">
                             <td class="">2</td>
-                            <td width="10%">member</td>
-                            <td>member@gmail.com</td>
-                            <td>member</td>
                             <td width="10%">
-                                <select
-                                        name="select_change_attr"
-                                        class="form-control"
-                                        data-url="/change-level-value_new/2"
-                                >
-                                    <option value="admin">Admin</option>
-                                    <option value="member" selected="selected"
-                                    >Member</option
-                                    >
-                                </select>
+                                Captain Ameriaca 2: Nội chiến Siêu Anh Hùng
                             </td>
+                            <td>Hoàn tất</td>
+                            <td>120</td>
+                            <td>Null</td>
                             <td>
                                 <p><i class="fa fa-user"></i> admin</p>
                                 <p><i class="fa fa-clock-o"></i> 13/12/2014</p>
@@ -136,4 +118,3 @@
         </div>
     </div>
 </div>
-
