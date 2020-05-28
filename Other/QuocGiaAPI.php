@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../Controller/ControllerUser.php";
-require_once __DIR__ . "/../Controller/ControllerNguoi.php";
+require_once __DIR__ . "/../Controller/ControllerQuocGia.php";
 
 session_start();
 if (!isset($_SESSION['email'])){
@@ -14,23 +14,18 @@ if (!isset($_SESSION['email'])){
         exit();
     }
 }
-$controllerNguoi = new ControllerNguoi();
-if (isset($_REQUEST['getDaoDien'])){
+$controllerQuocGia = new ControllerQuocGia();
+if (isset($_REQUEST['getQuocGia'])){
 
-    $daoDiens = $controllerNguoi->getAllDaoDien();
+    $quocGias = $controllerQuocGia->getAllQuocGia();
     $result = array();
-    foreach ($daoDiens as $item){
-        $result1 = array('id' => $item->getID(), 'hoten' => $item->getHOTEN(), 'ngaysinh'=>$item->getNGAYSINH(),
-            'quoctich' => $item->getQUOCTICH(), 'tieusu' => $item->getTIEUSU());
+    foreach ($quocGias as $item){
+        $result1 = array('id' => $item->getID(), 'ten' => $item->getTen());
         array_push($result, $result1);
     }
-   $result = array('daodien'=>$result);
+    $result = array('quocgia'=>$result);
     echo json_encode($result);
     exit();
-}
-
-if (isset($_REQUEST['adddaodien'])){
-    $controllerNguoi->addDaoDien($_REQUEST['hoten'], $_REQUEST['ngaysinh'], $_REQUEST['quoctich'], $_REQUEST['tieusu']);
 }
 
 

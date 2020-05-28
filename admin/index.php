@@ -194,7 +194,7 @@ if (!isset($_SESSION['email'])){
                                 <h3>Movie</h3>
                             </div>
                             <div class=\"zvn-add-new pull-right\">
-                                <a href=\"/formMovie.html\" class=\"btn btn-success\">
+                                <a href=\"index.php?page=moviemod\" class=\"btn btn-success\">
                                     <i class=\"fa fa-plus-circle\"></i> 
                                         Thêm mới Movie
                                 </a>

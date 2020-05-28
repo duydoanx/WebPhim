@@ -12,4 +12,25 @@ function getAllTheLoai(){
 
 }
 
+function addChiTietTheLoai($idphim, $idtheloai){
+    $sql = "INSERT INTO CHITIETTHELOAI VALUE(:idphim, :idtheloai)";
+    global $conn;
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':idphim', $idphim, PDO::PARAM_STR);
+    $stmt->bindParam(':idtheloai', $idtheloai, PDO::PARAM_STR);
+    $stmt->execute();
+}
+
+function getTheLoaiByIdPhim($idphim){
+    $sql = "Select ID, TENTHELOAI from THELOAI, CHITIETTHELOAI, PHIM where THELOAI.ID = CHITIETTHELOAI.IDTHELOAI 
+                    AND PHIM.ID = CHITIETTHELOAI.IDPHIM AND PHIM.ID = :idphim";;
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, "TheLoai" );
+    $stmt->bindParam(':idphim', $idphim, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+}
 ?>
