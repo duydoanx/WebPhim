@@ -1,136 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Admin | Form</title>
-    <!-- Bootstrap -->
-    <link href="asset/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Font Awesome -->
-    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <!-- Custom Theme Style -->
-    <link href="css/custom.min.css" rel="stylesheet" />
-    <link href="css/mycss.css" rel="stylesheet" />
-  </head>
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="index.php" class="site_title"
-                ><i
-                  ><img
-                    src="/img/logo.png"
-                    alt="logo"
-                    width="25px"
-                    height="25px"
-                /></i>
-                <span>Phim Hay</span></a
-              >
-            </div>
-            <div class="clearfix"></div>
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>Peter Parker</h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
-            <br />
-            <!-- sidebar menu -->
-            <div
-              id="sidebar-menu"
-              class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
-                <ul class="nav side-menu">
-                  <li>
-                    <a href="/"><i class="fa fa-home"></i> Home</a>
-                  </li>
-                  <li>
-                    <a href="/User.html"><i class="fa fa-user"></i> User</a>
-                  </li>
-                  <li>
-                    <a href="/Movie.html"><i class="fa fa-film"></i> Movie</a>
-                  </li>
-                  <li>
-                    <a href="/Login.html"
-                      ><i class="fa fa-sign-out"></i> Logout</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- /sidebar menu -->
-          </div>
-        </div>
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-              <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <a
-                    href="javascript:;"
-                    class="user-profile dropdown-toggle"
-                    data-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Peter Parker
-                    <span class="fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li>
-                      <a href="/">
-                        <i class="fa fa-home pull-right"></i> Home</a
-                      >
-                    </li>
-                    <li>
-                      <a href="/User.html">
-                        <i class="fa fa-user pull-right"></i> User</a
-                      >
-                    </li>
-                    <li>
-                      <a href="/Movie.html">
-                        <i class="fa fa-film pull-right"></i> Movie</a
-                      >
-                    </li>
-                    <li>
-                      <a href="/login.html"
-                        ><i class="fa fa-sign-out pull-right"></i> Log Out</a
-                      >
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
-        <div class="right_col" role="main">
-          <div class="page-header zvn-page-header">
-            <div class="zvn-page-header-title">
-              <h3>Thêm mới</h3>
-            </div>
-            <div class="zvn-page-header-breadcrumb">
-              <ul class="zvn-breadcrumb-title clearfix">
-                <li class="zvn-breadcrumb-item">
-                  <a href="index.php">
-                    Trang chủ
-                  </a>
-                </li>
-                <li class="zvn-breadcrumb-item">Thêm mới</li>
-              </ul>
-            </div>
-          </div>
+
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
@@ -168,6 +36,8 @@
                     <p><strong>- Password:</strong> phải có ký tự đặc biệt</p>
                   </div>
                   <form
+                    action="index.php"
+                    method="post"
                     id="demo-form2"
                     data-parsley-validate
                     class="form-horizontal form-label-left"
@@ -181,6 +51,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                            name="tenphimvn"
                           type="text"
                           id="TenPhimVN"
                           required="required"
@@ -197,13 +68,34 @@
 
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                            name="tenphimgoc"
                           type="text"
-                          id="TenPhimGoc  "
+                          id="TenPhimGoc"
                           required="required"
                           class="form-control col-md-7 col-xs-12"
                         />
                       </div>
                     </div>
+                      <div class="form-group">
+                          <label
+                                  class="control-label col-md-3 col-sm-3 col-xs-12"
+                                  for="DaoDien"
+                          >Đạo diễn
+                              <span class="required">*</span>
+                          </label>
+
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select style="width: 90%" id="DaoDien" class="js-example-basic-multiple" name="states[]" multiple="multiple">
+
+                                  <option value="AL">Alabama</option>
+
+                              </select>
+                              <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal" type="button" title="Thêm mới nếu chưa tồn tại." style="margin-bottom: 1px">+</button>
+
+                          </div>
+
+
+                      </div>
 
                     <div class="form-group">
                       <label
@@ -215,6 +107,7 @@
 
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                                name="trangthai"
                           type="text"
                           id="TrangThai"
                           required="required"
@@ -232,6 +125,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                                name="namphathanh"
                           type="date"
                           id="NamPhatHanh"
                           required="required"
@@ -250,6 +144,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                                name="thoiluong"
                           type="number"
                           id="ThoiLuong"
                           required="required"
@@ -267,6 +162,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                                name="chatluong"
                           type="text"
                           id="ChatLuong"
                           required="required"
@@ -284,6 +180,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                                name="dophangiai"
                           type="text"
                           id="DoPhanGiai"
                           required="required"
@@ -301,6 +198,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                                name="ngonngu"
                           type="text"
                           id="NgonNgu"
                           required="required"
@@ -318,6 +216,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                                name="anhphim"
                           type="file"
                           id="AnhPhim"
                           required="required"
@@ -329,14 +228,15 @@
                     <div class="form-group">
                       <label
                         class="control-label col-md-3 col-sm-3 col-xs-12"
-                        for="HuongDan"
-                        >Hướng Dẫn
+                        for="DuongDan"
+                        >Đường Dẫn
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                                name="duongdan"
                           type="text"
-                          id="HuongDan"
+                          id="DuongDan"
                           required="required"
                           class="form-control col-md-7 col-xs-12"
                         />
@@ -352,6 +252,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                                name="danhgia"
                           type="text"
                           id="DanhGia"
                           required="required"
@@ -370,6 +271,7 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input
+                                name="trailer"
                           type="file"
                           id="Trailer"
                           required="required"
@@ -384,7 +286,7 @@
                         <button class="btn btn-danger" type="button">
                           Quay về
                         </button>
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success" name="add_mod">
                           Lưu
                         </button>
                       </div>
@@ -395,21 +297,45 @@
             </div>
           </div>
         </div>
-      </div>
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            © Copyright 2020 Phim Hay
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Thêm đạo diễn</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <form id="addDaoDien">
+                              <input hidden name="adddaodien" value="true">
+                              <div class="form-group">
+                                  <label for="hoten" class="col-form-label">Họ tên:</label>
+                                  <input required type="text" name="hoten" class="form-control" id="hoten">
+                              </div>
+                              <div class="form-group">
+                                  <label for="ngaysinh" class="col-form-label">Ngày sinh:</label>
+                                  <input required class="form-control" name="ngaysinh" id="ngaysinh" type="date">
+                              </div>
+                              <div class="form-group">
+                                  <label for="quoctich" class="col-form-label">Quốc tịch:</label>
+                                  <input required type="text" name="quoctich" class="form-control" id="quoctich">
+                              </div>
+                              <div class="form-group">
+                                  <label for="tieusu" class="col-form-label">Tiểu sử:</label>
+                                  <textarea required class="form-control" name="tieusu" id="tieusu"></textarea>
+                              </div>
+                          </form>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                          <button type="submit" form="addDaoDien" class="btn btn-success">Lưu</button>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-    </div>
+
     <!-- jQuery -->
-    <script src="js/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="asset/bootstrap/dist/js/bootstrap.min.js"></script>
+
     <!-- custom js -->
-    <script src="js/formUser.js"></script>
-  </body>
-</html>
+<script src="js/formMovie.js"></script>

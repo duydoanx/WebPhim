@@ -1,3 +1,22 @@
+
+<?php
+    require_once __DIR__."/../Controller/ControllerPhim.php";
+
+    if (!isset($_SESSION['email'])){
+        header("Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/login.php");
+        exit();
+    }  else{
+        $controllerUser = new ControllerUser();
+        $user = $controllerUser->getUserFromEmail($_SESSION['email']);
+        if (strcmp($user->getISADMIN(), "1") != 0) {
+            header("Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . "/login.php");
+            exit();
+        }
+    }
+
+    $controllerPhim = new ControllerPhim();
+?>
+
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -16,101 +35,55 @@
                 <div class="table-responsive">
                     <table
                             class="table table-striped jambo_table bulk_action"
-                            id="table"
-                    >
+                            id="table">
                         <thead>
                         <tr class="headings">
-                            <th class="column-title">#</th>
+                            <th class="column-title">ID</th>
                             <th class="column-title">Tên</th>
                             <th class="column-title">Trạng Thái</th>
                             <th class="column-title">Thời Lượng</th>
                             <th class="column-title">Trailer</th>
-                            <th class="column-title">Tạo mới</th>
-                            <th class="column-title">Chỉnh sửa</th>
                             <th class="column-title">Hành động</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="even pointer">
-                            <td class="">1</td>
-                            <td width="10%">
-                                Captain Ameriaca 3: Nội chiến Siêu Anh Hùng
+                        <?php
+                        $phim = $controllerPhim->getAllPhim();
+                        foreach ($phim as $item){
+                            echo "<tr class=\"even pointer\">
+                            <td class=\"\">".$item->getID()."</td>
+                            <td style='max-width: 10%'>
+                                ".$item->getTENPHIMVN()."
                             </td>
-                            <td>Hoàn tất</td>
-                            <td>147</td>
-                            <td>Null</td>
-                            <td>
-                                <p><i class="fa fa-user"></i> admin</p>
-                                <p><i class="fa fa-clock-o"></i> 10/12/2014</p>
-                            </td>
-                            <td>
-                                <p><i class="fa fa-user"></i> hailan</p>
-                                <p><i class="fa fa-clock-o"></i> 10/12/2014</p>
-                            </td>
-                            <td class="last">
-                                <div class="zvn-box-btn-filter">
+                            <td>".$item->getTRANGTHAI()."</td>
+                            <td>".$item->getTHOILUONG()."</td>
+                            <td>".$item->getTRAILER()."</td>
+                            <td class=\"last\">
+                                <div class=\"zvn-box-btn-filter\">
                                     <a
-                                            href="/form/1"
-                                            type="button"
-                                            class="btn btn-icon btn-success"
-                                            data-toggle="tooltip"
-                                            data-placement="top"
-                                            data-original-title="Edit"
-                                    >
-                                        <i class="fa fa-pencil"></i> </a
-                                    ><a
-                                            href="/delete/1"
-                                            type="button"
-                                            class="btn btn-icon btn-danger btn-delete"
-                                            data-toggle="tooltip"
-                                            data-placement="top"
-                                            data-original-title="Delete"
-                                    >
-                                        <i class="fa fa-trash"></i>
+                                            href=\"/form/1\"
+                                            type=\"button\"
+                                            class=\"btn btn-icon btn-success\"
+                                            data-toggle=\"tooltip\"
+                                            data-placement=\"top\"
+                                            data-original-title=\"Edit\">
+                                        <i class=\"fa fa-pencil\"></i> </a>
+                                        <a
+                                            href=\"/delete/1\"
+                                            type=\"button\"
+                                            class=\"btn btn-icon btn-danger btn-delete\"
+                                            data-toggle=\"tooltip\"
+                                            data-placement=\"top\"
+                                            data-original-title=\"Delete\">
+                                        <i class=\"fa fa-trash\"></i>
                                     </a>
                                 </div>
                             </td>
-                        </tr>
-                        <tr class="odd pointer">
-                            <td class="">2</td>
-                            <td width="10%">
-                                Captain Ameriaca 2: Nội chiến Siêu Anh Hùng
-                            </td>
-                            <td>Hoàn tất</td>
-                            <td>120</td>
-                            <td>Null</td>
-                            <td>
-                                <p><i class="fa fa-user"></i> admin</p>
-                                <p><i class="fa fa-clock-o"></i> 13/12/2014</p>
-                            </td>
-                            <td>
-                                <p><i class="fa fa-user"></i> hailan</p>
-                                <p><i class="fa fa-clock-o"></i> 13/12/2014</p>
-                            </td>
-                            <td class="last">
-                                <div class="zvn-box-btn-filter">
-                                    <a
-                                            href="/form/2"
-                                            type="button"
-                                            class="btn btn-icon btn-success"
-                                            data-toggle="tooltip"
-                                            data-placement="top"
-                                            data-original-title="Edit"
-                                    >
-                                        <i class="fa fa-pencil"></i> </a
-                                    ><a
-                                            href="/delete/2"
-                                            type="button"
-                                            class="btn btn-icon btn-danger btn-delete"
-                                            data-toggle="tooltip"
-                                            data-placement="top"
-                                            data-original-title="Delete"
-                                    >
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        </tr>";
+                        }
+
+                        ?>
+
                         </tbody>
                     </table>
                 </div>

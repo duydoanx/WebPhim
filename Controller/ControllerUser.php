@@ -15,4 +15,20 @@ class ControllerUser{
     public function getUserFromEmail($email){
         return getUser($email);
     }
+
+    public function getUserFromUsername($username){
+        return getUser("", $username);
+    }
+
+    public function addUser($username, $password, $isadmin, $email, $hoten, $ngaysinh){
+        addUser($username, $password, $isadmin, $email, $hoten, $ngaysinh);
+    }
+
+    public function updateUser($username, $isadmin, $email, $hoten, $ngaysinh){
+        updateUser($username, $isadmin, $email, $hoten, $ngaysinh);
+    }
+
+    public function deleteUser($email){
+        deleteUser($email);
+    }
 }

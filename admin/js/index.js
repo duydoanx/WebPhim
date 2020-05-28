@@ -1,3 +1,7 @@
+$('.collapse-link').on("click", function () {
+    $(".x_content").toggle("fast");
+})
+
 $('#menu_toggle').on("click", function () {
     console.log("click")
     if ($('footer').css("margin-left") === "0px") {
@@ -13,7 +17,23 @@ $('#menu_toggle').on("click", function () {
         $('.nav-md .container.body .col-md-3.left_col').css('display', 'none')
     }
 })
+
+
 $('#sidebar-menu .menu_section ul li').on("click", function () {
     $('#sidebar-menu .menu_section ul li').removeClass('active')
     $(this).addClass('active')
 })
+
+function deleteUser(email) {
+    $.post(
+        'index.php',
+        {
+            page: "usermod",
+            type: "delete",
+            email: email
+        },
+        function (data) {
+            location.reload();
+        }
+    );
+}
