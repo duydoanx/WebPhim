@@ -23,3 +23,4 @@ $('#sidebar-menu .menu_section ul li').on("click", function () {
     $('#sidebar-menu .menu_section ul li').removeClass('active')
     $(this).addClass('active')
 })
+

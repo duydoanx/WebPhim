@@ -19,5 +19,13 @@ class ControllerTheLoai{
     {
         return $this->allTheLoai;
     }
+
+    public function addTheLoai2Phim($idphim, $idtheloai){
+        addChiTietTheLoai($idphim, $idtheloai);
+    }
+
+    public function getTheLoaiFormPhim($idphim){
+        return getTheLoaiByIdPhim($idphim);
+    }
 }
 ?>

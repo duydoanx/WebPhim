@@ -22,7 +22,13 @@ class ControllerQuocGia
         return $this->allQuocGia;
     }
 
+    public function addQuocGia2Phim($idphim, $idquocgia){
+        addChiTietQuocGia($idphim, $idquocgia);
+    }
 
+    public function getQuocGiaFormPhim($idphim){
+        return getQuocGiaByIdPhim($idphim);
+    }
 
 
 }

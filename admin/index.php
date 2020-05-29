@@ -14,6 +14,7 @@ if (!isset($_SESSION['email'])){
 }
 
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +25,7 @@ if (!isset($_SESSION['email'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="img/favicon.ico" type="image/ico" />
-    <title>Admin | Index</title>
+    <title>Admin</title>
     <!-- Bootstrap -->
     <link href="asset/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
@@ -33,34 +34,48 @@ if (!isset($_SESSION['email'])){
     <link href="css/custom.min.css" rel="stylesheet" />
     <!-- Custom Theme Style -->
     <link href="css/mycss.css" rel="stylesheet" />
-    <!-- data tables -->
+      <script src="js/jquery/dist/jquery.min.js"></script>
+      <!-- data tables -->
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+      <!-- Bootstrap -->
+
+
     <link
       rel="stylesheet"
       type="text/css"
       href="DataTables/datatables.min.css"/>
   </head>
   <body class="nav-md">
+  <?php
+  if(isset($_REQUEST['add_mod'])){
+      echo var_dump($_REQUEST['states']);
+  }
+  ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="../admin/index.php" class="site_title"
-                ><i
-                  ><img
-                    src="/img/logo.png"
-                    alt="logo"
-                    width="25px"
-                    height="25px"
-                /></i>
+              <a href="../admin/index.php" class="site_title">
+                  <i>
+                      <img
+                        src="/img/logo.png"
+                        alt="logo"
+                        width="25px"
+                        height="25px"/>
+                  </i>
                 <span>Phim Hay</span></a>
             </div>
             <div class="clearfix"></div>
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>Peter Parker</h2>
+                <span>Xin chào,</span>
+                  <?php
+                    echo "<h2>".$user->getUSERNAME()."</h2>";
+                  ?>
+
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -81,7 +96,7 @@ if (!isset($_SESSION['email'])){
                     <a href="../admin/"><i class="fa fa-home"></i> Home</a>
                   </li>
                     <?php
-                    if (isset($_REQUEST['page']) && strcmp($_REQUEST['page'], "user") == 0){
+                    if (isset($_REQUEST['page']) && (strcmp($_REQUEST['page'], "user") == 0 || strcmp($_REQUEST['page'], "usermod") == 0)){
                         echo "<li class=\"active\">";
                     }else echo "<li>";
                     ?>
@@ -89,7 +104,7 @@ if (!isset($_SESSION['email'])){
                     <a href="../admin/index.php?page=user"><i class="fa fa-user"></i> User</a>
                   </li>
                     <?php
-                    if (isset($_REQUEST['page']) && strcmp($_REQUEST['page'], "movie") == 0){
+                    if (isset($_REQUEST['page']) && strcmp($_REQUEST['page'], "movie") == 0 && strcmp($_REQUEST['page'], "moviemod")){
                         echo "<li class=\"active\">";
                     }else echo "<li>";
                     ?>
@@ -122,27 +137,29 @@ if (!isset($_SESSION['email'])){
                     data-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Peter Parker
+                      <?php
+                      echo $user->getUSERNAME();
+                      ?>
                     <span class="fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li>
-                      <a href="/">
+                      <a href="../admin/">
                         <i class="fa fa-home pull-right"></i> Home</a
                       >
                     </li>
                     <li>
-                      <a href="../admin/User.php">
+                      <a href="../admin/index.php?page=user">
                         <i class="fa fa-user pull-right"></i> User</a
                       >
                     </li>
                     <li>
-                      <a href="../admin/User.php">
+                      <a href="../admin/index.php?page=movie">
                         <i class="fa fa-film pull-right"></i> Movie</a
                       >
                     </li>
                     <li>
-                      <a href="/login.php"
+                      <a href="../Login.php?logout=true"
                         ><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                     </li>
                   </ul>
@@ -156,17 +173,17 @@ if (!isset($_SESSION['email'])){
         <div class="right_col" role="main">
           <div class="page-header zvn-page-header clearfix">
             <div class="zvn-page-header-title">
-              <h3>Home</h3>
-            </div>
-
               <?php
 
               if (isset($_REQUEST['page'])){
                   switch ($_REQUEST['page']){
                       case 'user':
+                      case 'usermod':
                           echo "
+                                <h3>User</h3>
+                            </div>
                             <div class=\"zvn-add-new pull-right\">
-                                <a href=\"/formUser.html\" class=\"btn btn-success\">
+                                <a href=\"index.php?page=usermod\" class=\"btn btn-success\">
                                     <i class=\"fa fa-plus-circle\"></i> 
                                         Thêm mới User
                                 </a>
@@ -174,59 +191,72 @@ if (!isset($_SESSION['email'])){
                           break;
                       case 'movie':
                           echo "
+                                <h3>Movie</h3>
+                            </div>
                             <div class=\"zvn-add-new pull-right\">
-                                <a href=\"/formMovie.html\" class=\"btn btn-success\">
+                                <a href=\"index.php?page=moviemod\" class=\"btn btn-success\">
                                     <i class=\"fa fa-plus-circle\"></i> 
                                         Thêm mới Movie
                                 </a>
                             </div>";
                           break;
+                      default:
+                          echo "<h3>Home</h3>
+                                </div>";
+                          break;
                   }
-              }
+              }else echo "<h3>Home</h3>
+                                </div>";
 
               ?>
 
           </div>
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>Tìm kiếm</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li class="pull-right">
-                      <a class="collapse-link BL"
-                        ><i class="fa fa-chevron-up"></i
-                      ></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content BL">
-                  <div class="row">
+              <?php
+              if (!(isset($_REQUEST['page']) &&  (strcmp($_REQUEST['page'], "usermod") == 0 || strcmp($_REQUEST['page'], "moviemod") == 0))){
+                  echo "<div class=\"row\">
+                            <div class=\"col-md-12 col-sm-12 col-xs-12\">
+                              <div class=\"x_panel\">
+                                <div class=\"x_title\">
+                                  <h2>Tìm kiếm</h2>
+                                  <ul class=\"nav navbar-right panel_toolbox\">
+                                    <li class=\"pull-right\">
+                                      <a class=\"collapse-link BL\"
+                                        ><i class=\"fa fa-chevron-up\"></i
+                                      ></a>
+                                    </li>
+                                  </ul>
+                                  <div class=\"clearfix\"></div>
+                                </div>
+                                  
+                                <div class=\"x_content BL\">
+                                  <div class=\"row\">
+                
+                                      <div class=\"input-group\">
+                                        <input
+                                          type=\"text\"
+                                          class=\"form-control\"
+                                          name=\"search_value\"
+                                          value=\"\"/>
+                                        <span class=\"input-group-btn\">
+                                          <button
+                                            id=\"btn-search\"
+                                            type=\"button\"
+                                            class=\"btn btn-primary\"
+                                          >
+                                            Tìm kiếm
+                                          </button>
+                                        </span>
+                                        <input type=\"hidden\" name=\"search_field\" value=\"all\" />
+                                      </div>
+                
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>";
+              }
+              ?>
 
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          class="form-control"
-                          name="search_value"
-                          value=""/>
-                        <span class="input-group-btn">
-                          <button
-                            id="btn-search"
-                            type="button"
-                            class="btn btn-primary"
-                          >
-                            Tìm kiếm
-                          </button>
-                        </span>
-                        <input type="hidden" name="search_field" value="all" />
-                      </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <!--box-lists-->
             <?php
 
@@ -237,6 +267,12 @@ if (!isset($_SESSION['email'])){
                             break;
                         case 'movie':
                             require_once __DIR__."/Movie.php";
+                            break;
+                        case 'usermod':
+                            require_once __DIR__."/formUser.php";
+                            break;
+                        case 'moviemod':
+                            require_once __DIR__."/formMovie.php";
                             break;
                     }
                 }
@@ -256,12 +292,11 @@ if (!isset($_SESSION['email'])){
       </div>
     </div>
     <!-- jQuery -->
-    <script src="js/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="asset/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- data tables -->
-    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-    <!-- custom js -->
-    <script src="js/index.js"></script>
+        <script src="asset/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- data tables -->
+        <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+        <!-- custom js -->
+        <script src="js/index.js"></script>
   </body>
+
 </html>

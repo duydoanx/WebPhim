@@ -50,4 +50,40 @@ function getUser($email = "", $username = ""){
     $result = $stmt->fetch();
     return $result;
 }
+
+function addUser($username, $password, $isadmin, $email, $hoten, $ngaysinh){
+    $sql = "INSERT INTO USER(USERNAME, PASSWORD, ISADMIN, EMAIL, HOTEN, NGAYSINH) 
+            VALUES (:username, :password, :isadmin, :email, :hoten, :ngaysinh)";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $password = md5($password);
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+    $stmt->bindParam(':isadmin', $isadmin, PDO::PARAM_BOOL);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':hoten', $hoten, PDO::PARAM_STR);
+    $stmt->bindParam(':ngaysinh', $ngaysinh, PDO::PARAM_STR);
+    $stmt->execute();
+}
+
+function updateUser($username, $isadmin, $email, $hoten, $ngaysinh){
+    $sql = "update USER set USERNAME = :username, ISADMIN = :isadmin, HOTEN = :hoten, NGAYSINH = :ngaysinh
+            where EMAIL = :email";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':isadmin', $isadmin, PDO::PARAM_BOOL);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':hoten', $hoten, PDO::PARAM_STR);
+    $stmt->bindParam(':ngaysinh', $ngaysinh, PDO::PARAM_STR);
+    $stmt->execute();
+}
+
+function deleteUser($email){
+    $sql = "delete from USER where EMAIL = :email";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
+}
 ?>

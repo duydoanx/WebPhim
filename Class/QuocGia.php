@@ -15,6 +15,15 @@ class QuocGia
     }
 
     /**
+     * @param mixed $ID
+     */
+    public function setID($ID)
+    {
+        $this->ID = $ID;
+    }
+
+
+    /**
      * @return mixed
      */
     public function getTen()

@@ -9,7 +9,7 @@ class ControllerPhim
      */
     public function getAllPhim()
     {
-        $a = getLengthUser();
+        $a = getLengthPhim();
         return getPhims(0, $a);
     }
 
