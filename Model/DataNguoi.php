@@ -45,7 +45,7 @@ function addDaoDien($id){
     global $conn;
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
 }
 
@@ -122,7 +122,7 @@ function addChiTietDaoDien($iddaodien, $idphim){
 }
 
 function addChiTietDienVien($iddienvien, $idphim){
-    $sql = "INSERT INTO CHITIETDAODIEN VALUE(:iddienvien, :idphim)";
+    $sql = "INSERT INTO CHITIETDIENVIEN VALUE(:iddienvien, :idphim)";
     global $conn;
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $conn->prepare($sql);
@@ -132,7 +132,7 @@ function addChiTietDienVien($iddienvien, $idphim){
 }
 
 function getDaoDienbyIdPhim($idphim){
-    $sql = "Select ID, HOTEN, NGAYSINH, QUOCTICH, TIEUSU from DAODIEN, NGUOI, CHITIETDAODIEN, PHIM 
+    $sql = "Select DAODIEN.IDDAODIEN as ID, HOTEN, NGAYSINH, QUOCTICH, TIEUSU from DAODIEN, NGUOI, CHITIETDAODIEN, PHIM 
             WHERE NGUOI.ID = DAODIEN.IDDAODIEN and CHITIETDAODIEN.IDDAODIEN = DAODIEN.IDDAODIEN and PHIM.ID = CHITIETDAODIEN.IDPHIM
                 and PHIM.ID = :idphim";;
     global $conn;
@@ -145,7 +145,7 @@ function getDaoDienbyIdPhim($idphim){
 }
 
 function getDienVienbyIdPhim($idphim){
-    $sql = "Select ID, HOTEN, NGAYSINH, QUOCTICH, TIEUSU from DIENVIEN, NGUOI, CHITIETDIENVIEN, PHIM 
+    $sql = "Select DIENVIEN.IDDIENVIEN as ID, HOTEN, NGAYSINH, QUOCTICH, TIEUSU from DIENVIEN, NGUOI, CHITIETDIENVIEN, PHIM 
             WHERE NGUOI.ID = DIENVIEN.IDDIENVIEN and CHITIETDIENVIEN.IDDIENVIEN = DIENVIEN.IDDIENVIEN and PHIM.ID = CHITIETDIENVIEN.IDPHIM
                 and PHIM.ID = :idphim";;
     global $conn;
@@ -155,4 +155,22 @@ function getDienVienbyIdPhim($idphim){
     $stmt->execute();
     $result = $stmt->fetchAll();
     return $result;
+}
+
+function deleteDaoDienByIdPhim($idphim){
+    $sql = "DELETE FROM CHITIETDAODIEN WHERE IDPHIM = :idphim";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt->bindParam(':idphim', $idphim, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+function deleteDienVienByIdPhim($idphim){
+    $sql = "DELETE FROM CHITIETDIENVIEN WHERE IDPHIM = :idphim";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt->bindParam(':idphim', $idphim, PDO::PARAM_INT);
+    $stmt->execute();
 }

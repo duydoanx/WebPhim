@@ -47,11 +47,6 @@ if (!isset($_SESSION['email'])){
       href="DataTables/datatables.min.css"/>
   </head>
   <body class="nav-md">
-  <?php
-  if(isset($_REQUEST['add_mod'])){
-      echo var_dump($_REQUEST['states']);
-  }
-  ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">

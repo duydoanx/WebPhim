@@ -23,8 +23,8 @@ function addChiTietTheLoai($idphim, $idtheloai){
 }
 
 function getTheLoaiByIdPhim($idphim){
-    $sql = "Select ID, TENTHELOAI from THELOAI, CHITIETTHELOAI, PHIM where THELOAI.ID = CHITIETTHELOAI.IDTHELOAI 
-                    AND PHIM.ID = CHITIETTHELOAI.IDPHIM AND PHIM.ID = :idphim";;
+    $sql = "Select THELOAI.ID as id, tenTheLoai from THELOAI, CHITIETTHELOAI, PHIM where THELOAI.ID = CHITIETTHELOAI.IDTHELOAI 
+                    AND PHIM.ID = CHITIETTHELOAI.IDPHIM AND PHIM.ID = :idphim";
     global $conn;
     $stmt = $conn->prepare($sql);
     $stmt->setFetchMode(PDO::FETCH_CLASS, "TheLoai" );
@@ -32,5 +32,14 @@ function getTheLoaiByIdPhim($idphim){
     $stmt->execute();
     $result = $stmt->fetchAll();
     return $result;
+}
+
+function deleteTheLoaiByIdPhim($idphim){
+    $sql = "DELETE FROM CHITIETTHELOAI WHERE IDPHIM = :idphim";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt->bindParam(':idphim', $idphim, PDO::PARAM_INT);
+    $stmt->execute();
 }
 ?>

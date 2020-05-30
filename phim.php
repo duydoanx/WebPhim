@@ -1,5 +1,7 @@
 <?php
     include_once "Controller/ControllerPhim.php";
+    include_once "Controller/ControllerNguoi.php";
+    include_once "Controller/ControllerDanhGia.php";
     if (!isset($_GET['phim'])){
         header("Location: ".(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://").$_SERVER['HTTP_HOST']."/");
         exit();
@@ -16,9 +18,11 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="script/HeaderScript.js"></script>
+    <script src="script/PhimScript.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto">
     <link rel="stylesheet" type="text/css" href="style/headerStyle.css">
     <link rel="stylesheet" type="text/css" href="style/CommentStyle.css">
+    <link rel="stylesheet" type="text/css" href="style/PhimStyle.css">
     <?php
         if (isset($_GET['tenphim'])){
             echo "<title>".$_GET['tenphim']."</title>";
@@ -42,7 +46,7 @@
                 <div class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end pb-3">
                     <div class="card align-self-end" style="width: 18rem;">
                         <?php
-                            echo "<img class=\"card-img-top\" src=\"img/PosterPhim/".$phim->getID().".jpg\" alt=\"Card image cap\">";
+                            echo "<img class=\"card-img-top\" src=\"".$phim->getANHPHIM()."\" alt=\"Card image cap\">";
                         ?>
 
                         <div class="card-body pt-0 pb-0">
@@ -50,7 +54,7 @@
                                 <div class="col-5 m-0 p-1">
                                     <?php
                                     if ($phim->getTrailer())
-                                        echo "<a href=\"https://www.youtube.com/watch?v=".$phim->getTRAILER()."\" class=\"btn btn-danger col-12\">Trialer</a>";
+                                        echo "<a href=\"https://www.youtube.com/watch?v=".$phim->getTRAILER()."\" class=\"btn btn-danger col-12\">Trailer</a>";
                                     else{
                                         echo "<a href=\"\" class=\"btn btn-danger col-12\">Trailer</a>";
                                     }
@@ -80,8 +84,69 @@
                             <p class='text-light'><span class='font-weight-bold'>Ngôn ngữ:</span> ".$phim->getNGONNGU()."</p>
                             <p class='text-light'><span class='font-weight-bold'>Độ phân giải:</span> <span class='text-danger font-weight-bold'>".$phim->getDOPHANGIAI()."</span></p>
                             ";
+                    echo "<p class='text-light'><span class='font-weight-bold'>Đạo diễn: </span>";
+                    $controllerNguoi = new ControllerNguoi();
+                    $nguoi = $controllerNguoi->getDaoDiensFormPhim($_REQUEST['id']);
+                    foreach ($nguoi as $item){
+                        echo "<a href='nguoi.php?id=".$item->getID()."'>".$item->getHOTEN()."</a>, ";
+                    }
+                    echo "</p>";
+
+                    echo "<p class='text-light'><span class='font-weight-bold'>Diễn viên: </span>";
+                    $controllerNguoi = new ControllerNguoi();
+                    $nguoi = $controllerNguoi->getDienViensFromPhim($_REQUEST['id']);
+                    foreach ($nguoi as $item){
+                        echo "<a href='nguoi.php?id=".$item->getID()."'>".$item->getHOTEN()."</a>, ";
+                    }
+                    echo "</p>";
 
                     ?>
+                    <div class="d-flex">
+                        <div class="" id="rating" <?php
+                        echo "data-id = '".$phim->getID()."' ";
+                        ?>>
+                            <input type="radio" id="star5" onclick="sendRate(this)" name="rating" value="5" />
+                            <label class = "full" for="star5" title="Tuyệt vời"></label>
+
+                            <input type="radio" id="star4half" onclick="sendRate(this)" name="rating" value="4.5" />
+                            <label class="half" for="star4half" title="Rất hay"></label>
+
+                            <input type="radio" id="star4" onclick="sendRate(this)" name="rating" value="4" />
+                            <label class = "full" for="star4" title="Hay"></label>
+
+                            <input type="radio" id="star3half" onclick="sendRate(this)" name="rating" value="3.5" />
+                            <label class="half" for="star3half" title="Cũng hay"></label>
+
+                            <input type="radio" id="star3" onclick="sendRate(this)" name="rating" value="3" />
+                            <label class = "full" for="star3" title="Tạm được"></label>
+
+                            <input type="radio" id="star2half" onclick="sendRate(this)" name="rating" value="2.5" />
+                            <label class="half" for="star2half" title="Hơi tệ"></label>
+
+                            <input type="radio" id="star2" onclick="sendRate(this)" name="rating" value="2" />
+                            <label class = "full" for="star2" title="Tệ"></label>
+
+                            <input type="radio" id="star1half" onclick="sendRate(this)" name="rating" value="1.5" />
+                            <label class="half" for="star1half" title="Quá tệ"></label>
+
+                            <input type="radio" id="star1" onclick="sendRate(this)" name="rating" value="1" />
+                            <label class = "full" for="star1" title="Phí thời gian"></label>
+
+                            <input type="radio" id="starhalf" onclick="sendRate(this)" name="rating" value="0.5" />
+                            <label class="half" for="starhalf" title="Đừng bao giờ xem"></label>
+                        </div>
+                        <span id="ketquadanhgia" <?php
+                            $controllerDanhGia = new ControllerDanhGia();
+                            echo "data-star = '".$controllerDanhGia->getDanhGiaFromPhim($phim->getID())."'";
+                        ?> class="align-self-center text-warning ml-3">
+                            <?php
+
+                            echo $controllerDanhGia->getDanhGiaFromPhim($phim->getID());
+                            ?>/5</span>
+                    </div>
+
+
+
 <!--                    <div class="card align-self-start bg-dark">-->
 <!--                        <div class="card-body text-light p-0 border-0" style="height: 200px;">-->
 <!--                            -->
@@ -92,11 +157,14 @@
                 <div class="row mt-3">
                     <h5 class="text-warning font-weight-bold p-0 ml-0">NỘI DUNG PHIM</h5>
                 </div>
-                <div class="row">
+                <div class="container-fluid">
 
                     <?php
                         echo "<h5 class='text-light'>".$phim->getNOIDUNGPHIM()."</h5>"
                     ?>
+
+
+
                 </div>
                 <?php
                 if ($phim->getTrailer()){

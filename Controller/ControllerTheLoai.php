@@ -1,6 +1,8 @@
 <?php
+
 require __DIR__."/../Model/DataTheLoai.php";
-class ControllerTheLoai{
+class ControllerTheLoai
+{
     private $allTheLoai;
 
     /**
@@ -26,6 +28,10 @@ class ControllerTheLoai{
 
     public function getTheLoaiFormPhim($idphim){
         return getTheLoaiByIdPhim($idphim);
+    }
+
+    public function deleteTheLoaiFromPhim($idphim){
+        deleteTheLoaiByIdPhim($idphim);
     }
 }
 ?>

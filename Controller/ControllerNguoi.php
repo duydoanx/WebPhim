@@ -45,4 +45,15 @@ class ControllerNguoi
     public function getDienViensFromPhim($idphim){
         return getDienVienbyIdPhim($idphim);
     }
+
+    public function deleteDaoDienFromPhim($idphim){
+        deleteDaoDienByIdPhim($idphim);
+    }
+
+    public function deleteDienVienFromPhim($idphim){
+        deleteDienVienByIdPhim($idphim);
+    }
+    public function getNguoiByID($id){
+        return getNguoiByID($id);
+    }
 }

@@ -3,7 +3,7 @@
 
 class QuocGia
 {
-    private $ID;
+    private $id;
     private $ten;
 
     /**
@@ -11,7 +11,7 @@ class QuocGia
      */
     public function getID()
     {
-        return $this->ID;
+        return $this->id;
     }
 
     /**
@@ -19,7 +19,7 @@ class QuocGia
      */
     public function setID($ID)
     {
-        $this->ID = $ID;
+        $this->id = $ID;
     }
 
 
