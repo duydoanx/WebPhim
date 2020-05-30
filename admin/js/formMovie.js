@@ -16,14 +16,17 @@ $(document).ready(function() {
         placeholder: "Chọn hoặc thêm các đạo diễn của phim...",
         allowClear: true
     });
-    loadDaoDien();
     loadDienVien();
+    loadDaoDien();
     loadTheLoai();
     loadQuocGia();
+
+
 });
 
 function loadDaoDien() {
     $('#DaoDien').empty();
+    var id = $('#demo-form2').attr("data-id");
     $.post(
         '../Other/DaoDienAPI.php',
         {
@@ -31,14 +34,45 @@ function loadDaoDien() {
         },
         function (data) {
             data = JSON.parse(data);
-            for (item in data.daodien)
-            $('#DaoDien').append('<option value=\"'+data.daodien[item].id+'\">'+data.daodien[item].hoten+'</option>');
+            if (id){
+                $.post(
+                    '../Other/DaoDienAPI.php',
+                    {
+                        getSelectedDaoDien: true,
+                        idphim: id
+                    },
+                    function (data1) {
+                        data1 = JSON.parse(data1);
+                        for (item in data.daodien) {
+                            for (item1 in data1.daodien){
+                                if (data1.daodien[item1].id == data.daodien[item].id){
+                                    data.daodien[item].selected = true;
+                                    // $('#DaoDien').append('<option value=\"' + data.daodien[item].id + '\">' + data.daodien[item].hoten + '</option>');
+                                }
+                            }
+
+                            // $('#DaoDien').append('<option value=\"' + data.daodien[item].id + '\">' + data.daodien[item].hoten + '</option>');
+                        }
+                        $("#DaoDien").select2({
+                            data: data.daodien,
+                            placeholder: 'Bấm để chọn'
+                        })
+                    }
+                );
+            }else {
+                $("#DaoDien").select2({
+                    data: data.daodien,
+                    placeholder: 'Bấm để chọn'
+                })
+            }
+
         }
     );
 }
 
 function loadDienVien() {
     $('#DienVien').empty();
+    var id = $('#demo-form2').attr("data-id");
     $.post(
         '../Other/DienVienAPI.php',
         {
@@ -46,14 +80,42 @@ function loadDienVien() {
         },
         function (data) {
             data = JSON.parse(data);
-            for (item in data.dienvien)
-                $('#DienVien').append('<option value=\"'+data.dienvien[item].id+'\">'+data.dienvien[item].hoten+'</option>');
+            if (id){
+                $.post(
+                    '../Other/DienVienAPI.php',
+                    {
+                        getSelectedDienVien: true,
+                        idphim: id
+                    },
+                    function (data1) {
+                        data1 = JSON.parse(data1);
+                        for (item in data.dienvien) {
+                            for (item1 in data1.dienvien){
+                                if (data1.dienvien[item1].id == data.dienvien[item].id){
+                                    data.dienvien[item].selected = true;
+                                }
+                            }
+                        }
+                        $("#DienVien").select2({
+                            data: data.dienvien,
+                            placeholder: 'Bấm để chọn'
+                        })
+                    }
+                );
+            }else {
+                $("#DienVien").select2({
+                    data: data.dienvien,
+                    placeholder: 'Bấm để chọn'
+                })
+            }
+
         }
     );
 }
 
 function loadTheLoai() {
     $('#TheLoai').empty();
+    var id = $('#demo-form2').attr("data-id");
     $.post(
         '../Other/TheLoaiAPI.php',
         {
@@ -61,14 +123,41 @@ function loadTheLoai() {
         },
         function (data) {
             data = JSON.parse(data);
-            for (item in data.theloai)
-                $('#TheLoai').append('<option value=\"'+data.theloai[item].id+'\">'+data.theloai[item].tentheloai+'</option>');
+            if (id){
+                $.post(
+                    '../Other/TheLoaiAPI.php',
+                    {
+                        getSelectedTheLoai: true,
+                        idphim: id
+                    },
+                    function (data1) {
+                        data1 = JSON.parse(data1);
+                        for (item in data.theloai) {
+                            for (item1 in data1.theloai){
+                                if (data1.theloai[item1].id == data.theloai[item].id){
+                                    data.theloai[item].selected = true;
+                                }
+                            }
+                        }
+                        $("#TheLoai").select2({
+                            data: data.theloai,
+                            placeholder: 'Bấm để chọn'
+                        })
+                    }
+                );
+            }else {
+                $("#TheLoai").select2({
+                    data: data.theloai,
+                    placeholder: 'Bấm để chọn'
+                })
+            }
         }
     );
 }
 
 function loadQuocGia() {
     $('#QuocGia').empty();
+    var id = $('#demo-form2').attr("data-id");
     $.post(
         '../Other/QuocGiaAPI.php',
         {
@@ -76,8 +165,34 @@ function loadQuocGia() {
         },
         function (data) {
             data = JSON.parse(data);
-            for (item in data.quocgia)
-                $('#QuocGia').append('<option value=\"'+data.quocgia[item].id+'\">'+data.quocgia[item].ten+'</option>');
+            if (id){
+                $.post(
+                    '../Other/QuocGiaAPI.php',
+                    {
+                        getSelectedQuocGia: true,
+                        idphim: id
+                    },
+                    function (data1) {
+                        data1 = JSON.parse(data1);
+                        for (item in data.quocgia) {
+                            for (item1 in data1.quocgia){
+                                if (data1.quocgia[item1].id == data.quocgia[item].id){
+                                    data.quocgia[item].selected = true;
+                                }
+                            }
+                        }
+                        $("#QuocGia").select2({
+                            data: data.quocgia,
+                            placeholder: 'Bấm để chọn'
+                        })
+                    }
+                );
+            }else {
+                $("#QuocGia").select2({
+                    data: data.quocgia,
+                    placeholder: 'Bấm để chọn'
+                })
+            }
         }
     );
 }

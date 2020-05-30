@@ -71,7 +71,12 @@ $thanhcong = true;
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Thêm mới/Sửa</h2>
+                    <?php
+                    if (isset($_REQUEST['email'])){
+                        echo "<h2>Chỉnh sửa</h2>";
+                    }else echo "<h2>Thêm mới</h2>";
+                    ?>
+
                   <ul class="nav navbar-right panel_toolbox">
                     <li class="pull-right">
                       <a class="collapse-link"

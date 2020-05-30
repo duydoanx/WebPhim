@@ -61,7 +61,7 @@
                             <td class=\"last\">
                                 <div class=\"zvn-box-btn-filter\">
                                     <a
-                                            href=\"/form/1\"
+                                            href=\"index.php?page=moviemod&editPhim=true&idphim=".$item->getID()."\"
                                             type=\"button\"
                                             class=\"btn btn-icon btn-success\"
                                             data-toggle=\"tooltip\"

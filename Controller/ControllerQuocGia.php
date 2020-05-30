@@ -1,4 +1,6 @@
 <?php
+
+
 require __DIR__."/../Model/DataQuocGia.php";
 
 class ControllerQuocGia
@@ -26,9 +28,14 @@ class ControllerQuocGia
         addChiTietQuocGia($idphim, $idquocgia);
     }
 
-    public function getQuocGiaFormPhim($idphim){
+    public function getQuocGiaFromPhim($idphim){
         return getQuocGiaByIdPhim($idphim);
     }
+
+    public function deleteQuocGiaFromPhim($idphim){
+        deleteQuocGiaByIdPhim($idphim);
+    }
+
 
 
 }

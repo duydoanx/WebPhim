@@ -1,4 +1,6 @@
 <?php
+
+
 require __DIR__."/../Model/DataPhim.php";
 
 class ControllerPhim
@@ -28,4 +30,22 @@ class ControllerPhim
     public function getLengthPhim(){
         return getLengthPhim();
     }
+
+    public function addPhim($tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong, $chatluong,
+                            $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer){
+        return addPhim($tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong, $chatluong,
+            $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer);
+    }
+
+    public function addAnhPhim($idphim, $anhphim){
+        addAnhPhim($idphim, $anhphim);
+    }
+
+    public function updatePhim($idphim, $tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong, $chatluong,
+                               $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer){
+        updatePhim($idphim, $tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong, $chatluong,
+            $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer);
+    }
+
+
 }

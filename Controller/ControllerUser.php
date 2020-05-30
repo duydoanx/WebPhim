@@ -1,6 +1,9 @@
 <?php
+
+
 require __DIR__."/../Model/DataUser.php";
-class ControllerUser{
+class ControllerUser
+{
     public function getAllUser(){
         $a = getLengthUser();
         return getUsers(0, $a);

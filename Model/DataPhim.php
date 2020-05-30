@@ -51,12 +51,12 @@ function getPhim($id){
     return $result;
 }
 
-function addPhim($tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong,
-                 $chatluong, $dophangiai, $ngongu, $anhphim, $noidungphim, $duongdan, $danhgia, $trailer){
-    $sql = "INSERT INTO PHIM(TENPHIMVN, TENPHIMGOC, TRANGTHAI, NAMPHATHANH, THOILUONG, CHATLUONG,
-                 DOPHANGIAI, NGONNGU, ANHPHIM, NOIDUNGPHIM, DUONGDAN, DANHGIA, TRAILER) VALUES 
-                 (:tenphimvn, : tenphimgoc, :trangthai, :namphathanh, :thoiluong, :chatluong,
-                  :dophangiai, :ngonngu, :anhphim, :noidungphim, :duongdan, :danhgia, :chatluong)";
+function addPhim($tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong, $chatluong,
+                 $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer){
+    $sql = "INSERT INTO PHIM(TENPHIMVN, TENPHIMGOC, TRANGTHAI, NAMPHATHANH, THOILUONG, CHATLUONG, 
+                 DOPHANGIAI, NGONNGU, NOIDUNGPHIM, DUONGDAN, TRAILER) VALUE 
+    (:tenphimvn, :tenphimgoc, :trangthai, :namphathanh, :thoiluong, :chatluong, 
+     :dophangiai, :ngonngu, :noidungphim, :duongdan, :trailer)";
     global $conn;
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $conn->prepare($sql);
@@ -64,15 +64,50 @@ function addPhim($tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong,
     $stmt->bindParam(':tenphimgoc', $tenphimgoc, PDO::PARAM_STR);
     $stmt->bindParam(':trangthai', $trangthai, PDO::PARAM_STR);
     $stmt->bindParam(':namphathanh', $namphathanh, PDO::PARAM_STR);
-    $stmt->bindParam(':thoiluong', $thoiluong, PDO::PARAM_STR);
+    $stmt->bindParam(':thoiluong', $thoiluong, PDO::PARAM_INT);
     $stmt->bindParam(':chatluong', $chatluong, PDO::PARAM_STR);
     $stmt->bindParam(':dophangiai', $dophangiai, PDO::PARAM_STR);
-    $stmt->bindParam(':ngonngu', $ngongu, PDO::PARAM_STR);
-    $stmt->bindParam(':anhphim', $anhphim, PDO::PARAM_STR);
+    $stmt->bindParam(':ngonngu', $ngonngu, PDO::PARAM_STR);
     $stmt->bindParam(':noidungphim', $noidungphim, PDO::PARAM_STR);
     $stmt->bindParam(':duongdan', $duongdan, PDO::PARAM_STR);
-    $stmt->bindParam(':danhgia', $danhgia, PDO::PARAM_STR);
     $stmt->bindParam(':trailer', $trailer, PDO::PARAM_STR);
+    $stmt->execute();
+    $last_id = $conn->lastInsertId();
+    return $last_id;
+}
+
+function addAnhPhim($idphim, $anhphim){
+    $sql = "update PHIM set ANHPHIM = :anhphim where PHIM.ID = :idphim";
+    global $conn;
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':anhphim', $anhphim, PDO::PARAM_STR);
+    $stmt->bindParam(':idphim', $idphim, PDO::PARAM_INT);
+    $stmt->execute();
+
+}
+
+function updatePhim($idphim, $tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong, $chatluong,
+                    $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer){
+    $sql = "UPDATE PHIM SET TENPHIMVN = :tenphimvn, TENPHIMGOC = :tenphimgoc, TRANGTHAI = :trangthai, 
+                    NAMPHATHANH = :namphathanh, THOILUONG = :thoiluong, CHATLUONG = :chatluong, DOPHANGIAI = :dophangiai, 
+                    NGONNGU = :ngonngu, NOIDUNGPHIM = :noidungphim, DUONGDAN = :duongdan, TRAILER = :trailer 
+                    WHERE ID = :idphim";
+    global $conn;
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':tenphimvn', $tenphimvn, PDO::PARAM_STR);
+    $stmt->bindParam(':tenphimgoc', $tenphimgoc, PDO::PARAM_STR);
+    $stmt->bindParam(':trangthai', $trangthai, PDO::PARAM_STR);
+    $stmt->bindParam(':namphathanh', $namphathanh, PDO::PARAM_STR);
+    $stmt->bindParam(':thoiluong', $thoiluong, PDO::PARAM_INT);
+    $stmt->bindParam(':chatluong', $chatluong, PDO::PARAM_STR);
+    $stmt->bindParam(':dophangiai', $dophangiai, PDO::PARAM_STR);
+    $stmt->bindParam(':ngonngu', $ngonngu, PDO::PARAM_STR);
+    $stmt->bindParam(':noidungphim', $noidungphim, PDO::PARAM_STR);
+    $stmt->bindParam(':duongdan', $duongdan, PDO::PARAM_STR);
+    $stmt->bindParam(':trailer', $trailer, PDO::PARAM_STR);
+    $stmt->bindParam(':idphim', $idphim, PDO::PARAM_INT);
     $stmt->execute();
 }
 ?>
