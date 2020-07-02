@@ -18,7 +18,7 @@
             include_once "Other/header.php";
             include_once "Controller/ControllerPhim.php";
             $phim = new ControllerPhim();
-            $allPhim = $phim->getPhims(0, 8);
+            $allPhim = $phim->getPhims(0, 16);
             $phimDeCu = $phim->getPhimDeCu();
 
         ?>

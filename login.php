@@ -8,7 +8,6 @@ if (isset($_REQUEST['checkLogin'])){
 }
 
 ?>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -35,9 +34,15 @@ if (isset($_REQUEST['checkLogin'])){
         session_destroy();
     }
     session_start();
+    if (isset($_REQUEST['email'])){
+        echo $_REQUEST['email'];
+        echo $_REQUEST['password'];
+    }
     if (!isset($_SESSION['email'])) {
         if (isset($_POST["login"])) {
-            session_start();
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
             $user = new ControllerUser();
             if ($user->checkLogin($_POST["email"], $_POST["password"])) {
                 $_SESSION['email'] = $_POST["email"];
@@ -82,6 +87,7 @@ if (isset($_REQUEST['checkLogin'])){
                                 }
                             ?>
                             <button name="login" class="btn btn-lg btn-success btn-block text-uppercase" type="submit">Đăng nhập</button>
+                            <a class="btn btn-lg btn-outline-dark btn-block text-uppercase" href="dangki.php">Đăng ký</a>
                         </form>
                     </div>
                 </div>

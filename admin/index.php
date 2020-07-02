@@ -106,7 +106,7 @@ if (!isset($_SESSION['email'])){
                     <a href="../admin/index.php?page=movie"><i class="fa fa-film"></i> Movie</a>
                   </li>
                   <li>
-                    <a href="../Login.php?logout=true">
+                    <a href="../login.php?logout=true">
                         <i class="fa fa-sign-out"></i>
                             Logout
                     </a>

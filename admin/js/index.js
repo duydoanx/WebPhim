@@ -37,3 +37,17 @@ function deleteUser(email) {
         }
     );
 }
+
+function deletePhim(id) {
+    $.post(
+        'index.php',
+        {
+            page: "moviemod",
+            type: "delete",
+            id: id
+        },
+        function (data) {
+            location.reload();
+        }
+    );
+}

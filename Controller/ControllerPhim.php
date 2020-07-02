@@ -47,5 +47,31 @@ class ControllerPhim
             $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer);
     }
 
+    public function getPhimsFromQuocGia($idquocgia, $a, $b){
+        return getPhimByIdQuocGia($idquocgia, $a, $b);
+    }
 
+    public function getLengthPhimsFromQuocGia($idquocgia){
+        return getLengthQuocGia($idquocgia);
+    }
+
+    public function getPhimsFromTheLoai($idtheloai, $a, $b){
+        return getPhimByIdTheLoai($idtheloai, $a, $b);
+    }
+
+    public function getLengthPhimsFromTheLoai($idtheloai){
+        return getLengthTheLoai($idtheloai);
+    }
+
+    public function timkiemPhims($key, $a, $b){
+        return timKiemPhims($key, $a, $b);
+    }
+
+    public function timkiemLengthPhims($key){
+        return timKiemLengthPhims($key);
+    }
+
+    public function deletePhim($id){
+       deletePhim($id);
+    }
 }
