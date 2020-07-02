@@ -110,4 +110,105 @@ function updatePhim($idphim, $tenphimvn, $tenphimgoc, $trangthai, $namphathanh, 
     $stmt->bindParam(':idphim', $idphim, PDO::PARAM_INT);
     $stmt->execute();
 }
+
+function getPhimByIdQuocGia($idquocgia, $a, $b){
+    $sql = "Select ID, TENPHIMVN, TENPHIMGOC, TRANGTHAI, NAMPHATHANH, THOILUONG, CHATLUONG,
+                DOPHANGIAI, NGONNGU, ANHPHIM, NOIDUNGPHIM, DUONGDAN, DANHGIA, TRAILER 
+            from PHIM, CHITIETQUOCGIA
+            where CHITIETQUOCGIA.IDQUOCGIA = :idquocgia and PHIM.ID = CHITIETQUOCGIA.IDPHIM
+            ORDER BY ID desc limit :a, :b";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, "Phim" );
+    $stmt->bindParam(':idquocgia', $idquocgia, PDO::PARAM_INT);
+    $stmt->bindParam(':a', $a, PDO::PARAM_INT);
+    $stmt->bindParam(':b', $b, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+}
+
+function getLengthQuocGia($idquocgia){
+    $sql = "Select count(*) as length 
+            from PHIM, CHITIETQUOCGIA
+            where CHITIETQUOCGIA.IDQUOCGIA = :idquocgia and PHIM.ID = CHITIETQUOCGIA.IDPHIM";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $stmt->bindParam(':idquocgia', $idquocgia, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result["length"];
+}
+
+function getPhimByIdTheLoai($idtheloai, $a, $b){
+    $sql = "Select ID, TENPHIMVN, TENPHIMGOC, TRANGTHAI, NAMPHATHANH, THOILUONG, CHATLUONG,
+                DOPHANGIAI, NGONNGU, ANHPHIM, NOIDUNGPHIM, DUONGDAN, DANHGIA, TRAILER 
+            from PHIM, CHITIETTHELOAI
+            where CHITIETTHELOAI.IDTHELOAI = :idtheloai and PHIM.ID = CHITIETTHELOAI.IDPHIM
+            ORDER BY ID desc limit :a, :b";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, "Phim" );
+    $stmt->bindParam(':idtheloai', $idtheloai, PDO::PARAM_INT);
+    $stmt->bindParam(':a', $a, PDO::PARAM_INT);
+    $stmt->bindParam(':b', $b, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+}
+
+function getLengthTheLoai($idtheloai){
+    $sql = "Select count(*) as length 
+            from PHIM, CHITIETTHELOAI
+            where CHITIETTHELOAI.IDTHELOAI = :idtheloai and PHIM.ID = CHITIETTHELOAI.IDPHIM";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $stmt->bindParam(':idtheloai', $idtheloai, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result["length"];
+}
+
+function timKiemPhims($key, $a, $b){
+    $sql = "Select ID, TENPHIMVN, TENPHIMGOC, TRANGTHAI, NAMPHATHANH, THOILUONG, CHATLUONG,
+                DOPHANGIAI, NGONNGU, ANHPHIM, NOIDUNGPHIM, DUONGDAN, DANHGIA, TRAILER 
+            from PHIM
+            where TENPHIMVN like :key or TENPHIMGOC like :key
+            ORDER BY ID desc limit :a, :b";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, "Phim" );
+    $key = '%'.$key.'%';
+    $stmt->bindParam(':key', $key, PDO::PARAM_STR);
+    $stmt->bindParam(':a', $a, PDO::PARAM_INT);
+    $stmt->bindParam(':b', $b, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+}
+
+function timKiemLengthPhims($key){
+    $sql = "Select count(*) as length 
+            from PHIM
+            where TENPHIMVN like :key or TENPHIMGOC like :key";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $key = '%'.$key.'%';
+    $stmt->bindParam(':key', $key, PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result['length'];
+}
+
+function deletePhim($id){
+    $sql = "delete from PHIM where ID = :id";
+    global $conn;
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
 ?>

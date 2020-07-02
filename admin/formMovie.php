@@ -28,8 +28,9 @@
     $noidungphim_error = false;
     $trailer_error = false;
 
+    $controllerPhim = new ControllerPhim();
+
     if (isset($_REQUEST['editPhim']) && isset($_REQUEST['idphim'])){
-        $controllerPhim = new ControllerPhim();
         $phim = $controllerPhim->getPhim($_REQUEST['idphim']);
         $tenphimvn = $phim->getTENPHIMVN();
         $tenphimgoc = $phim->getTENPHIMGOC();
@@ -42,249 +43,252 @@
         $duongdan = $phim->getDUONGDAN();
         $noidungphim = $phim->getNOIDUNGPHIM();
         $trailer = $phim->getTRAILER();
-    }
-
-    if (isset($_REQUEST['addPhim'])){
-        if (!isset($_REQUEST['idphim'])) {
-            $tenphimvn = $_REQUEST['tenphimvn'];
-            $tenphimgoc = $_REQUEST['tenphimgoc'];
-            $daodien = $_REQUEST['daodien'];
-            $dienvien = $_REQUEST['dienvien'];
-            $theloai = $_REQUEST['theloai'];
-            $quocgia = $_REQUEST['quocgia'];
-            $trangthai = $_REQUEST['trangthai'];
-            $namphathanh = $_REQUEST['namphathanh'];
-            $thoiluong = $_REQUEST['thoiluong'];
-            $chatluong = $_REQUEST['chatluong'];
-            $dophangiai = $_REQUEST['dophangiai'];
-            $ngonngu = $_REQUEST['ngonngu'];
-            $duongdan = $_REQUEST['duongdan'];
-            $noidungphim = $_REQUEST['noidungphim'];
-            $trailer = null;
-            if (isset($_REQUEST['trailer'])) {
-                $trailer = $_REQUEST['trailer'];
-            }
-            $controllerPhim = new ControllerPhim();
-            $controllerNguoi = new ControllerNguoi();
-            $controllerTheLoai = new ControllerTheLoai();
-            $controllerQuocGia = new ControllerQuocGia();
-            $id = $controllerPhim->addPhim($tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong, $chatluong,
-                $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer);
-            foreach ($daodien as $item) {
-                $controllerNguoi->addDaoDien2Phim($item, $id);
-            }
-            foreach ($dienvien as $item) {
-                $controllerNguoi->addDienVien2Phim($item, $id);
-            }
-            foreach ($theloai as $item) {
-                $controllerTheLoai->addTheLoai2Phim($id, $item);
-            }
-            foreach ($quocgia as $item) {
-                $controllerQuocGia->addQuocGia2Phim($id, $item);
-            }
-
-            if (isset($_FILES['anhphim']) && $_FILES["anhphim"]["error"] == 0) {
-                $target_dir = "../img/PosterPhim/";
-                $name = $_FILES["anhphim"]["name"];
-                $array = explode(".", $name);
-                $ext = end($array);
-                $target_file = $target_dir . $id . "." . $ext;
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-                $check = getimagesize($_FILES["anhphim"]["tmp_name"]);
-                if ($check !== false) {
-                    $uploadOk = 1;
-                } else {
-                    echo "<h5 class='text-danger'>File is not an image.</h5>";
-                    $uploadOk = 0;
-                }
-
-                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                    && $imageFileType != "gif") {
-                    echo "<h5 class='text-danger'>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h5>";
-                    $uploadOk = 0;
-                }
-
-                if ($uploadOk == 1) {
-                    if (move_uploaded_file($_FILES["anhphim"]["tmp_name"], $target_file)) {
-                        $controllerPhim->addAnhPhim($id, "img/PosterPhim/" . $id . '.' . $ext);
-                    } else {
-                        echo "<h5 class='text-danger'>Sorry, there was an error uploading your file.</h5>";
-                    }
-                }
-            }
-        }else{
-            if (isset($_REQUEST['tenphimvn'])) {
+    }else
+        if (isset($_REQUEST['addPhim'])){
+            if (!isset($_REQUEST['idphim'])) {
                 $tenphimvn = $_REQUEST['tenphimvn'];
-            }else {
-                $tenphimvn_error = true;
-                $tenphimvn = "";
-            }
-
-            if (isset($_REQUEST['tenphimgoc'])) {
                 $tenphimgoc = $_REQUEST['tenphimgoc'];
-            }else {
-                $tenphimgoc_error = true;
-                $tenphimgoc = "";
-            }
-
-            if (isset($_REQUEST['daodien'])) {
                 $daodien = $_REQUEST['daodien'];
-            }else {
-                $daodien_error = true;
-                $daodien = array();
-            }
-
-            if (isset($_REQUEST['dienvien'])) {
                 $dienvien = $_REQUEST['dienvien'];
-            }else {
-                $dienvien_error = true;
-                $dienvien = array();
-            }
-
-            if (isset($_REQUEST['theloai'])) {
                 $theloai = $_REQUEST['theloai'];
-            }else {
-                $theloai_error = true;
-                $theloai = array();
-            }
-
-            if (isset($_REQUEST['quocgia'])) {
                 $quocgia = $_REQUEST['quocgia'];
-            }else {
-                $quocgia_error = true;
-                $quocgia = array();
-            }
-
-            if (isset($_REQUEST['trangthai'])) {
                 $trangthai = $_REQUEST['trangthai'];
-            }else {
-                $trangthai_error = true;
-                $trangthai = "";
-            }
-
-            if (isset($_REQUEST['namphathanh'])) {
                 $namphathanh = $_REQUEST['namphathanh'];
-            }else {
-                $namphathanh_error = true;
-                $namphathanh = "";
-            }
-
-            if (isset($_REQUEST['thoiluong'])) {
                 $thoiluong = $_REQUEST['thoiluong'];
-            }else {
-                $thoiluong_error = true;
-                $thoiluong = "";
-            }
-
-            if (isset($_REQUEST['chatluong'])) {
                 $chatluong = $_REQUEST['chatluong'];
-            }else {
-                $chatluong_error = true;
-                $chatluong = "";
-            }
-
-            if (isset($_REQUEST['dophangiai'])) {
                 $dophangiai = $_REQUEST['dophangiai'];
-            }else {
-                $dophangiai_error = true;
-                $dophangiai = "";
-            }
-
-            if (isset($_REQUEST['ngonngu'])) {
                 $ngonngu = $_REQUEST['ngonngu'];
-            }else {
-                $ngonngu_error = true;
-                $ngonngu = "";
-            }
-
-            if (isset($_REQUEST['ngonngu'])) {
                 $duongdan = $_REQUEST['duongdan'];
-            }else {
-                $duongdan_error = true;
-                $duongdan = "";
-            }
-
-            if (isset($_REQUEST['noidungphim'])) {
                 $noidungphim = $_REQUEST['noidungphim'];
-            }else {
-                $noidungphim_error = true;
-                $noidungphim = "";
-            }
+                $trailer = null;
+                if (isset($_REQUEST['trailer'])) {
+                    $trailer = $_REQUEST['trailer'];
+                }
+                $controllerPhim = new ControllerPhim();
+                $controllerNguoi = new ControllerNguoi();
+                $controllerTheLoai = new ControllerTheLoai();
+                $controllerQuocGia = new ControllerQuocGia();
+                $id = $controllerPhim->addPhim($tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong, $chatluong,
+                    $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer);
+                foreach ($daodien as $item) {
+                    $controllerNguoi->addDaoDien2Phim($item, $id);
+                }
+                foreach ($dienvien as $item) {
+                    $controllerNguoi->addDienVien2Phim($item, $id);
+                }
+                foreach ($theloai as $item) {
+                    $controllerTheLoai->addTheLoai2Phim($id, $item);
+                }
+                foreach ($quocgia as $item) {
+                    $controllerQuocGia->addQuocGia2Phim($id, $item);
+                }
 
-            if (isset($_REQUEST['trailer'])) {
-                $trailer = $_REQUEST['trailer'];
-            }else {
-                $trailer_error = true;
-                $trailer = "";
-            }
-
-            $controllerPhim = new ControllerPhim();
-            $controllerNguoi = new ControllerNguoi();
-            $controllerTheLoai = new ControllerTheLoai();
-            $controllerQuocGia = new ControllerQuocGia();
-
-            $id = $_REQUEST['idphim'];
-
-            $controllerPhim->updatePhim($id, $tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong, $chatluong,
-                $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer);
-
-            $controllerNguoi->deleteDaoDienFromPhim($id);
-            $controllerNguoi->deleteDienVienFromPhim($id);
-            $controllerTheLoai->deleteTheLoaiFromPhim($id);
-            $controllerQuocGia->deleteQuocGiaFromPhim($id);
-
-            foreach ($daodien as $item) {
-
-                $controllerNguoi->addDaoDien2Phim($item, $id);
-            }
-            foreach ($dienvien as $item) {
-
-                $controllerNguoi->addDienVien2Phim($item, $id);
-            }
-            foreach ($theloai as $item) {
-
-                $controllerTheLoai->addTheLoai2Phim($id, $item);
-            }
-            foreach ($quocgia as $item) {
-
-                $controllerQuocGia->addQuocGia2Phim($id, $item);
-            }
-
-            if (isset($_FILES['anhphim']) && $_FILES["anhphim"]["error"] == 0){
-                $target_dir = "../img/PosterPhim/";
-                $name = $_FILES["anhphim"]["name"];
-                $array = explode(".", $name);
-                $ext = end($array);
-                $target_file = $target_dir . $id . "." . $ext;
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-                $check = getimagesize($_FILES["anhphim"]["tmp_name"]);
-                if ($check !== false) {
+                if (isset($_FILES['anhphim']) && $_FILES["anhphim"]["error"] == 0) {
+                    $target_dir = "../img/PosterPhim/";
+                    $name = $_FILES["anhphim"]["name"];
+                    $array = explode(".", $name);
+                    $ext = end($array);
+                    $target_file = $target_dir . $id . "." . $ext;
                     $uploadOk = 1;
-                } else {
-                    echo "<h5 class='text-danger'>File is not an image.</h5>";
-                    $uploadOk = 0;
-                }
+                    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                    && $imageFileType != "gif") {
-                    echo "<h5 class='text-danger'>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h5>";
-                    $uploadOk = 0;
-                }
-
-                if ($uploadOk == 1) {
-                    if (move_uploaded_file($_FILES["anhphim"]["tmp_name"], $target_file)) {
-                        $controllerPhim->addAnhPhim($id, "img/PosterPhim/" . $id . '.' . $ext);
+                    $check = getimagesize($_FILES["anhphim"]["tmp_name"]);
+                    if ($check !== false) {
+                        $uploadOk = 1;
                     } else {
-                        echo "<h5 class='text-danger'>Sorry, there was an error uploading your file.</h5>";
+                        echo "<h5 class='text-danger'>File is not an image.</h5>";
+                        $uploadOk = 0;
+                    }
+
+                    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                        && $imageFileType != "gif") {
+                        echo "<h5 class='text-danger'>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h5>";
+                        $uploadOk = 0;
+                    }
+
+                    if ($uploadOk == 1) {
+                        if (move_uploaded_file($_FILES["anhphim"]["tmp_name"], $target_file)) {
+                            $controllerPhim->addAnhPhim($id, "img/PosterPhim/" . $id . '.' . $ext);
+                        } else {
+                            echo "<h5 class='text-danger'>Sorry, there was an error uploading your file.</h5>";
+                        }
+                    }
+                }
+            }else{
+                if (isset($_REQUEST['tenphimvn'])) {
+                    $tenphimvn = $_REQUEST['tenphimvn'];
+                }else {
+                    $tenphimvn_error = true;
+                    $tenphimvn = "";
+                }
+
+                if (isset($_REQUEST['tenphimgoc'])) {
+                    $tenphimgoc = $_REQUEST['tenphimgoc'];
+                }else {
+                    $tenphimgoc_error = true;
+                    $tenphimgoc = "";
+                }
+
+                if (isset($_REQUEST['daodien'])) {
+                    $daodien = $_REQUEST['daodien'];
+                }else {
+                    $daodien_error = true;
+                    $daodien = array();
+                }
+
+                if (isset($_REQUEST['dienvien'])) {
+                    $dienvien = $_REQUEST['dienvien'];
+                }else {
+                    $dienvien_error = true;
+                    $dienvien = array();
+                }
+
+                if (isset($_REQUEST['theloai'])) {
+                    $theloai = $_REQUEST['theloai'];
+                }else {
+                    $theloai_error = true;
+                    $theloai = array();
+                }
+
+                if (isset($_REQUEST['quocgia'])) {
+                    $quocgia = $_REQUEST['quocgia'];
+                }else {
+                    $quocgia_error = true;
+                    $quocgia = array();
+                }
+
+                if (isset($_REQUEST['trangthai'])) {
+                    $trangthai = $_REQUEST['trangthai'];
+                }else {
+                    $trangthai_error = true;
+                    $trangthai = "";
+                }
+
+                if (isset($_REQUEST['namphathanh'])) {
+                    $namphathanh = $_REQUEST['namphathanh'];
+                }else {
+                    $namphathanh_error = true;
+                    $namphathanh = "";
+                }
+
+                if (isset($_REQUEST['thoiluong'])) {
+                    $thoiluong = $_REQUEST['thoiluong'];
+                }else {
+                    $thoiluong_error = true;
+                    $thoiluong = "";
+                }
+
+                if (isset($_REQUEST['chatluong'])) {
+                    $chatluong = $_REQUEST['chatluong'];
+                }else {
+                    $chatluong_error = true;
+                    $chatluong = "";
+                }
+
+                if (isset($_REQUEST['dophangiai'])) {
+                    $dophangiai = $_REQUEST['dophangiai'];
+                }else {
+                    $dophangiai_error = true;
+                    $dophangiai = "";
+                }
+
+                if (isset($_REQUEST['ngonngu'])) {
+                    $ngonngu = $_REQUEST['ngonngu'];
+                }else {
+                    $ngonngu_error = true;
+                    $ngonngu = "";
+                }
+
+                if (isset($_REQUEST['ngonngu'])) {
+                    $duongdan = $_REQUEST['duongdan'];
+                }else {
+                    $duongdan_error = true;
+                    $duongdan = "";
+                }
+
+                if (isset($_REQUEST['noidungphim'])) {
+                    $noidungphim = $_REQUEST['noidungphim'];
+                }else {
+                    $noidungphim_error = true;
+                    $noidungphim = "";
+                }
+
+                if (isset($_REQUEST['trailer'])) {
+                    $trailer = $_REQUEST['trailer'];
+                }else {
+                    $trailer_error = true;
+                    $trailer = "";
+                }
+
+                $controllerPhim = new ControllerPhim();
+                $controllerNguoi = new ControllerNguoi();
+                $controllerTheLoai = new ControllerTheLoai();
+                $controllerQuocGia = new ControllerQuocGia();
+
+                $id = $_REQUEST['idphim'];
+
+                $controllerPhim->updatePhim($id, $tenphimvn, $tenphimgoc, $trangthai, $namphathanh, $thoiluong, $chatluong,
+                    $dophangiai, $ngonngu, $noidungphim, $duongdan, $trailer);
+
+                $controllerNguoi->deleteDaoDienFromPhim($id);
+                $controllerNguoi->deleteDienVienFromPhim($id);
+                $controllerTheLoai->deleteTheLoaiFromPhim($id);
+                $controllerQuocGia->deleteQuocGiaFromPhim($id);
+
+                foreach ($daodien as $item) {
+
+                    $controllerNguoi->addDaoDien2Phim($item, $id);
+                }
+                foreach ($dienvien as $item) {
+
+                    $controllerNguoi->addDienVien2Phim($item, $id);
+                }
+                foreach ($theloai as $item) {
+
+                    $controllerTheLoai->addTheLoai2Phim($id, $item);
+                }
+                foreach ($quocgia as $item) {
+
+                    $controllerQuocGia->addQuocGia2Phim($id, $item);
+                }
+
+                if (isset($_FILES['anhphim']) && $_FILES["anhphim"]["error"] == 0){
+                    $target_dir = "../img/PosterPhim/";
+                    $name = $_FILES["anhphim"]["name"];
+                    $array = explode(".", $name);
+                    $ext = end($array);
+                    $target_file = $target_dir . $id . "." . $ext;
+                    $uploadOk = 1;
+                    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+                    $check = getimagesize($_FILES["anhphim"]["tmp_name"]);
+                    if ($check !== false) {
+                        $uploadOk = 1;
+                    } else {
+                        echo "<h5 class='text-danger'>File is not an image.</h5>";
+                        $uploadOk = 0;
+                    }
+
+                    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                        && $imageFileType != "gif") {
+                        echo "<h5 class='text-danger'>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h5>";
+                        $uploadOk = 0;
+                    }
+
+                    if ($uploadOk == 1) {
+                        if (move_uploaded_file($_FILES["anhphim"]["tmp_name"], $target_file)) {
+                            $controllerPhim->addAnhPhim($id, "img/PosterPhim/" . $id . '.' . $ext);
+                        } else {
+                            echo "<h5 class='text-danger'>Sorry, there was an error uploading your file.</h5>";
+                        }
                     }
                 }
             }
-        }
-    }
+        }else
+            if (isset($_REQUEST['type'])){
+                if (strcmp($_REQUEST['type'], 'delete') == 0)
+                $controllerPhim->deletePhim($_REQUEST['id']);
+            }
 ?>
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">

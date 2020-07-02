@@ -61,7 +61,7 @@ session_start();
                             echo " <div class=\"dropdown-col\">";
                             foreach ($allTheLoai as $item){
                                 $dem = $dem + 1;
-                                echo "<a class=\"dropdown-item bg-dark text-light\" href=\"#\">".$item->getTenTheLoai()."</a>";
+                                echo "<a class=\"dropdown-item bg-dark text-light\" href=\"../danhsach.php?duyet=theloai&idtheloai=".$item->getID()."&trang=1\">".$item->getTenTheLoai()."</a>";
                                 if ($dem<count($allTheLoai)){
                                     echo "</div>";
                                     echo " <div class=\"dropdown-col\">";
@@ -83,7 +83,7 @@ session_start();
                             echo " <div class=\"dropdown-col\">";
                             foreach ($allCuocGia as $item){
                                 $dem = $dem + 1;
-                                echo "<a class=\"dropdown-item bg-dark text-light\" href=\"#\">".$item->getTen()."</a>";
+                                echo "<a class=\"dropdown-item bg-dark text-light\" href=\"../danhsach.php?duyet=quocgia&idquocgia=".$item->getID()."&trang=1\">".$item->getTen()."</a>";
                                 if ($dem<count($allCuocGia)){
                                     echo "</div>";
                                     echo " <div class=\"dropdown-col\">";
@@ -94,35 +94,14 @@ session_start();
                             ?>
                         </div>
                     </li>
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <strong>PHIM LẺ</strong>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <strong>PHIM BỘ</strong>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
                 </ul>
 
-                <form class="form-inline p-0 mb-sm-1">
+                <form class="form-inline p-0 mb-sm-1" action="../danhsach.php" method="get">
                     <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Nhập tên phim..." aria-label="Search">
+                        <input class="form-control" type="search" name="timkiem" placeholder="Nhập tên phim..." aria-label="Search">
+                        <input hidden name="duyet" value="timkiem">
                         <div class="input-group-append">
-                            <button class="btn btn-dark" type="button">Tìm Kiếm</button>
+                            <button class="btn btn-dark" type="submit">Tìm Kiếm</button>
                         </div>
                     </div>
                 </form>
@@ -134,6 +113,9 @@ session_start();
                 if (!isset($_SESSION['email'])){
                     echo "<button onclick='loginURL()' id='login-bt' type=\"button\" class=\"btn btn-dark\" aria-haspopup=\"true\" aria-expanded=\"false\">
                                     Đăng nhập
+                                  </button>
+                                  <button onclick='toURL(\"dangki.php\")' id='login-bt' type=\"button\" class=\"btn btn - dark\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                    Đăng ký
                                   </button>";
 
                 }else{

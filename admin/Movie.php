@@ -13,7 +13,6 @@
             exit();
         }
     }
-
     $controllerPhim = new ControllerPhim();
 ?>
 
@@ -61,29 +60,45 @@
                             <td class=\"last\">
                                 <div class=\"zvn-box-btn-filter\">
                                     <a
-                                            href=\"index.php?page=moviemod&editPhim=true&idphim=".$item->getID()."\"
-                                            type=\"button\"
-                                            class=\"btn btn-icon btn-success\"
-                                            data-toggle=\"tooltip\"
-                                            data-placement=\"top\"
-                                            data-original-title=\"Edit\">
-                                        <i class=\"fa fa-pencil\"></i> </a>
-                                        <a
-                                            href=\"/delete/1\"
-                                            type=\"button\"
-                                            class=\"btn btn-icon btn-danger btn-delete\"
-                                            data-toggle=\"tooltip\"
+                                        href=\"index.php?page=moviemod&editPhim=true&idphim=".$item->getID()."\"
+                                        type=\"button\"
+                                        class=\"btn btn-icon btn-success\"
+                                        data-toggle=\"tooltip\"
+                                        data-placement=\"top\"
+                                        data-original-title=\"Edit\">
+                                    <i class=\"fa fa-pencil\"></i> </a>
+                                    <button                                                   
+                                            type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" data-target=\"#ModalId".$item->getID()."\"
                                             data-placement=\"top\"
                                             data-original-title=\"Delete\">
                                         <i class=\"fa fa-trash\"></i>
-                                    </a>
+                                    </button>
                                 </div>
                             </td>
-                        </tr>";
+                            </tr>";
+
+                            echo "<div class=\"modal fade\" id=\"ModalId".$item->getID()."\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">
+                                        <div class=\"modal-dialog\" role=\"document\">
+                                            <div class=\"modal-content\">
+                                                <div class=\"modal-header\">
+                                                    <h5 class=\"modal-title\" id=\"exampleModalLabel\">Xác nhận</h5>
+                                                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
+                                                        <span aria-hidden=\"true\">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class=\"modal-body\">
+                                                    Bạn có muốn xóa phim ".$item->getTENPHIMVN()."
+                                                </div>
+                                                <div class=\"modal-footer\">
+                                                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Đóng</button>      
+                                                  
+                                                    <button onclick='deletePhim(\"".$item->getID()."\")' type=\"button\" class=\"btn btn-primary\">Xác nhận</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>";
                         }
-
                         ?>
-
                         </tbody>
                     </table>
                 </div>

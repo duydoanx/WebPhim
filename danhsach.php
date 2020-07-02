@@ -32,7 +32,7 @@
 
     if (isset($_REQUEST['trang'])){
         if ($_REQUEST['trang'] > ceil($size/$num)){
-            echo "<h1 class='text-danger topFix m-auto'>Sai thông tin trang</h1>";
+            echo "<h1 class='text-danger topFix m-auto'>Sai thông tin trang hoặc trang trống</h1>";
         }
         $trang = $_REQUEST['trang'];
         $start = ($trang - 1) * $num;
@@ -40,10 +40,61 @@
     $allPhim = $controllerPhim->getPhims($start, $num);
 
     if(isset($_REQUEST['duyet'])){
-        if (strcmp($_REQUEST['duyet'],"quocgia")){
+        if (strcmp($_REQUEST['duyet'],"quocgia") == 0){
+            $allPhim = $controllerPhim->getPhimsFromQuocGia($_REQUEST['idquocgia'], $start, $num);
+            $start = 0;
+            $trang = 1;
+            $num = 24;
+            $size = $controllerPhim->getLengthPhimsFromQuocGia($_REQUEST['idquocgia']);
+            $duyet = "quocgia";
 
+            if (isset($_REQUEST['trang'])){
+                if ($_REQUEST['trang'] > ceil($size/$num)){
+                    echo "<h1 class='text-danger topFix m-auto'>Trang trống</h1>";
+                }
+                $trang = $_REQUEST['trang'];
+                $start = ($trang - 1) * $num;
+            }
         }
     }
+
+    if(isset($_REQUEST['duyet'])){
+        if (strcmp($_REQUEST['duyet'],"theloai") == 0){
+            $allPhim = $controllerPhim->getPhimsFromTheLoai($_REQUEST['idtheloai'], $start, $num);
+            $start = 0;
+            $trang = 1;
+            $num = 24;
+            $size = $controllerPhim->getLengthPhimsFromTheLoai($_REQUEST['idtheloai']);
+            $duyet = "theloai";
+
+            if (isset($_REQUEST['trang'])){
+                if ($_REQUEST['trang'] > ceil($size/$num)){
+                    echo "<h1 class='text-danger topFix m-auto'>Trang trống</h1>";
+                }
+                $trang = $_REQUEST['trang'];
+                $start = ($trang - 1) * $num;
+            }
+        }
+    }
+
+if(isset($_REQUEST['duyet'])){
+    if (strcmp($_REQUEST['duyet'],"timkiem") == 0){
+        $allPhim = $controllerPhim->timkiemPhims($_REQUEST['timkiem'], $start, $num);
+        $start = 0;
+        $trang = 1;
+        $num = 24;
+        $size = $controllerPhim->timkiemLengthPhims($_REQUEST['timkiem']);
+        $duyet = "timkiem";
+
+        if (isset($_REQUEST['trang'])){
+            if ($_REQUEST['trang'] > ceil($size/$num)){
+                echo "<h1 class='text-danger topFix m-auto'>Trang trống</h1>";
+            }
+            $trang = $_REQUEST['trang'];
+            $start = ($trang - 1) * $num;
+        }
+    }
+}
 
 ?>
 <div class="container topFix">
@@ -70,14 +121,34 @@
     <nav aria-label="Page navigation" class="mt-3">
         <ul class="pagination">
             <?php
-            if ($_REQUEST['trang'] <= ceil($size/$num)) {
+            if ($trang <= ceil($size/$num)) {
                 if ($start > 0) {
-                    echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=" . ($trang - 1) . "\">Trang trước</a></li>";
+                    if (strcmp($duyet,"quocgia") == 0){
+                        echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=" . ($trang - 1) . "&idquocgia=".$_REQUEST['idquocgia']."\">Trang trước</a></li>";
+                    }else if (strcmp($duyet,"theloai") == 0){
+                        echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=" . ($trang - 1) . "&idtheloai=".$_REQUEST['idtheloai']."\">Trang trước</a></li>";
+                    }else if (strcmp($_REQUEST['duyet'],"timkiem") == 0){
+                        echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=" . ($trang - 1) . "&timkiem=".$_REQUEST['timkiem']."\">Trang trước</a></li>";
+                    }else
+                        echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=" . ($trang - 1) . "\">Trang trước</a></li>";
                 }
+            if (strcmp($duyet,"quocgia") == 0) {
+                echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=$trang&idquocgia=".$_REQUEST['idquocgia']."\">$trang</a></li>";
+            }else if (strcmp($duyet,"theloai") == 0){
+                echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=$trang&idtheloai=".$_REQUEST['idtheloai']."\">$trang</a></li>";
+            }else if (strcmp($_REQUEST['duyet'],"timkiem") == 0){
+                echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=$trang&timkiem=".$_REQUEST['timkiem']."\">$trang</a></li>";
+            }else
                 echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=$trang\">$trang</a></li>";
-
                 if ($trang + 1 <= ceil($size / $num)) {
-                    echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=" . ($trang + 1) . "\">Trang kế</a></li>";
+                    if (strcmp($duyet,"quocgia") == 0) {
+                        echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=" . ($trang + 1) . "&idquocgia=".$_REQUEST['idquocgia']."\">Trang kế</a></li>";
+                    }else if (strcmp($duyet,"theloai") == 0){
+                        echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=" . ($trang + 1) . "&idtheloai=".$_REQUEST['idtheloai']."\">Trang kế</a></li>";
+                    }else if (strcmp($_REQUEST['duyet'],"timkiem") == 0){
+                        echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=" . ($trang + 1) . "&timkiem=".$_REQUEST['timkiem']."\">Trang kế</a></li>";
+                    }else
+                        echo "<li class=\"page-item\"><a class=\"page-link bg-success text-light\" href=\"danhsach.php?duyet=$duyet&trang=" . ($trang + 1) . "\">Trang kế</a></li>";
                 }
             }
             ?>
